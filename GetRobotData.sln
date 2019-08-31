@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetRobotData.Core", "GetRobotData.Core\GetRobotData.Core.csproj", "{E24F5F9B-0BDC-405A-95CE-FFC3978F027E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringManipulation", "StringManipulation\StringManipulation.csproj", "{40736A45-7C93-49E9-A655-831ABC7805B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E24F5F9B-0BDC-405A-95CE-FFC3978F027E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E24F5F9B-0BDC-405A-95CE-FFC3978F027E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E24F5F9B-0BDC-405A-95CE-FFC3978F027E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E24F5F9B-0BDC-405A-95CE-FFC3978F027E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40736A45-7C93-49E9-A655-831ABC7805B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40736A45-7C93-49E9-A655-831ABC7805B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40736A45-7C93-49E9-A655-831ABC7805B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40736A45-7C93-49E9-A655-831ABC7805B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5BF39084-DDEC-4A48-A4FE-30B6A7FA44AF}
+	EndGlobalSection
+EndGlobal
