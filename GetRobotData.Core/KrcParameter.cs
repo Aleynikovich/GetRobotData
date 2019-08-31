@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Win32;
 
 namespace GetRobotData.Core
@@ -38,7 +35,7 @@ namespace GetRobotData.Core
 
             else if (RegistryPath != null)
             {
-                return (string) Registry.GetValue(RegistryPath, Name, "not found");
+                return Convert.ToString(Registry.GetValue(RegistryPath, Name, "not found")) ;
             }
 
             else
