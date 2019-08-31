@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -15,13 +16,11 @@ namespace GetRobotData.Core
             this.Path = krcFilepath;
             this.Name = krcFileName;
         }
+
+        public string Read()
+        {
+            return File.ReadAllText(this.Path + this.Name);
+        }
     }
 
-    public class KrcParameter
-    {
-        public string Name;
-        public string Value;
-
-
-    }
 }

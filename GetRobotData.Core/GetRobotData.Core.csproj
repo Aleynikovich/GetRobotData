@@ -42,12 +42,13 @@
   <ItemGroup>
     <Compile Include="Core.cs" />
     <Compile Include="KrcFile.cs" />
+    <Compile Include="KrcParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StringManipulation\StringManipulation.csproj">
+    <ProjectReference Include="..\StringManipulation\Libs.csproj">
       <Project>{40736a45-7c93-49e9-a655-831abc7805b4}</Project>
-      <Name>StringManipulation</Name>
+      <Name>Libs</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
