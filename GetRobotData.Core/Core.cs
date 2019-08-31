@@ -6,14 +6,11 @@ using Microsoft.Win32;
 
 namespace GetRobotData.Core
 {
-    class Program
+    class Core
     {
         static void Main(string[] args)
         {
-
-            Console.WriteLine("Hello world");
-            Console.ReadLine();
-
+            Console.WriteLine("Hello world!");
 
         }
     }
