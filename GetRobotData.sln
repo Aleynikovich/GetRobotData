@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetRobotData.Core", "GetRob
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libs", "StringManipulation\Libs.csproj", "{40736A45-7C93-49E9-A655-831ABC7805B4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestFiles", "TestFiles", "{B35B1752-BD88-4090-8374-52CE4C2EF93C}"
+	ProjectSection(SolutionItems) = preProject
+		$config.dat = $config.dat
+		$machine.dat = $machine.dat
+		$robcor.dat = $robcor.dat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

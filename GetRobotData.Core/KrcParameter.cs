@@ -9,7 +9,6 @@ namespace GetRobotData.Core
     public class KrcParameter
     {
         public string Name;
-        public string Value;
         public KrcFile SourceFile;
         public string StartSearchLimit, EndSearchLimit;
         public string RegistryPath;
@@ -26,7 +25,7 @@ namespace GetRobotData.Core
             this.Name = krcParameterName;
             this.SourceFile = sourceFile;
             this.StartSearchLimit = startSearchLimit;
-            this.StartSearchLimit = endSearchLimit;
+            this.EndSearchLimit = endSearchLimit;
             this.RegistryPath = registryPath;
         }
 
@@ -43,8 +42,8 @@ namespace GetRobotData.Core
             }
 
             else
-            {
-                return "No value found";
+            { 
+                return "ERROR: No source has been defined for " + this.Name;
             }
         }
     }
