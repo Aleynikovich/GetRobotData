@@ -7,8 +7,8 @@
     <ProjectGuid>{40736A45-7C93-49E9-A655-831ABC7805B4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StringManipulation</RootNamespace>
-    <AssemblyName>StringManipulation</AssemblyName>
+    <RootNamespace>Libs</RootNamespace>
+    <AssemblyName>Libs</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -39,8 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Internals\Unzip.cs" />
     <Compile Include="StringManipulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
