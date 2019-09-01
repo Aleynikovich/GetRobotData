@@ -22,7 +22,7 @@ namespace GetRobotData.Core
             KrcParameter robotName = new KrcParameter(krcParameterName:"Robotname", registryPath: @"HKEY_LOCAL_MACHINE\SOFTWARE\KUKA Roboter GmbH\RobotData");
             KrcParameter serialNumber = new KrcParameter(krcParameterName: "SerialNumber", registryPath: @"HKEY_LOCAL_MACHINE\SOFTWARE\KUKA Roboter GmbH\RobotData");
 
-
+            
 
             Console.WriteLine(version.GetValue());
             Console.WriteLine(trafoName.GetValue());
