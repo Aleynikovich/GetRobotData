@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="KukaRoboter.BackupManagerService">
+      <HintPath>..\..\..\..\..\..\KRC\SmartHMI\KukaRoboter.BackupManagerService.dll</HintPath>
+    </Reference>
     <Reference Include="KukaRoboter.CoreUtil">
       <HintPath>..\KUKALIBS\KukaRoboter.CoreUtil.dll</HintPath>
     </Reference>
