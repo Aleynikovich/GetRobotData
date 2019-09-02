@@ -1,0 +1,833 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <!--maxBoundsDefinition-->
+   <xs:complexType name="boundaries">
+      <xs:simpleContent>
+         <xs:extension base="xs:double">
+
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="boolean">
+      <xs:simpleContent>
+         <xs:extension base="xs:byte">
+            <xs:attribute name="DataType"></xs:attribute>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+
+   <xs:element name="configuration">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element type="xs:string" name="SchemaVersion" minOccurs="0"/>
+            <xs:element name="ControllerInformation" minOccurs="0">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element type="xs:string" name="ControllerType"/>
+                     <xs:element type="xs:string" name="FirmwareVersion"/>
+                     <xs:element name="KukaOptionPackages">
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element name="KukaOptionPackage" maxOccurs="unbounded" minOccurs="0">
+                                 <xs:complexType>
+                                    <xs:simpleContent>
+                                       <xs:extension base="xs:string">
+                                          <xs:attribute type="xs:string" name="Identifier" use="optional"/>
+                                          <xs:attribute type="xs:string" name="MinVersion" use="optional"/>
+                                       </xs:extension>
+                                    </xs:simpleContent>
+                                 </xs:complexType>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+            <xs:element name="KUKARoboter.SafeRobot.Parameters">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="encryptedData">
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element name="SafetyParameters">
+                                 <xs:complexType>
+                                    <xs:sequence>
+                                       <xs:element name="RangeMonitoring">
+                                          <xs:complexType>
+                                             <xs:sequence>
+                                                <xs:element name="CellSpace" minOccurs="0" maxOccurs="1">
+                                                   <xs:annotation>
+                                                      <xs:documentation>
+                                                         May contain up to 10 polygons. Attributes: Number[required]
+                                                      </xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:complexType>
+                                                      <xs:sequence>
+                                                         <xs:element name="Zmin" minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: double, Value: [-100000] - [100000](mm)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:minInclusive value="-100000"/>
+                                                                     <xs:maxInclusive value="100000"/>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="Zmax" minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: double, Value: [-100000] - [100000](mm)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:minInclusive value="-100000"/>
+                                                                     <xs:maxInclusive value="100000"/>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="Polygon" minOccurs="0" maxOccurs="10">
+                                                            <xs:complexType>
+                                                               <xs:all>
+                                                                  <xs:element name="X" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-100000] - [100000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-100000"/>
+                                                                              <xs:maxInclusive value="100000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="Y" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-100000] - [100000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-100000"/>
+                                                                              <xs:maxInclusive value="100000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="IsPolygonNodeActive" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: byte, Value: [0](false) - [1](true)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:enumeration value ="0"></xs:enumeration>
+                                                                              <xs:enumeration value ="1"></xs:enumeration>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                               </xs:all>
+                                                               <xs:attribute name="Number" type="xs:byte" use="required" />
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                      </xs:sequence>
+                                                   </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="WorkspaceMonitoring"  minOccurs="0" maxOccurs="16">
+                                                   <xs:annotation>
+                                                      <xs:documentation>
+                                                         Attributes: Number[required], Name[optional]
+                                                      </xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:complexType>
+                                                      <xs:sequence>
+                                                         <xs:element name="Activation"  minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: byte, Value: [255](always off) OR [0](always on) OR [50](by user input)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:enumeration value ="255"></xs:enumeration>
+                                                                     <xs:enumeration value ="0"></xs:enumeration>
+                                                                     <xs:enumeration value ="50"></xs:enumeration>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="RobotStops"  minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: byte, Value: [0](false) - [1](true)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boolean">
+                                                                     <xs:pattern value="[0]|[1]"></xs:pattern>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="RangeType"  minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: byte, Value: [0](Axisspace) - [1](Cartesian space)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:enumeration value ="0"></xs:enumeration>
+                                                                     <xs:enumeration value ="1"></xs:enumeration>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="IsProtectedSpace"  minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: byte, Value: [0](false) - [1](true)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:enumeration value ="0"></xs:enumeration>
+                                                                     <xs:enumeration value ="1"></xs:enumeration>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="MonitoringStop"  minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: byte, Value: [0](false) - [1](true)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:enumeration value ="0"></xs:enumeration>
+                                                                     <xs:enumeration value ="1"></xs:enumeration>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="CheckCartesianSpeedInProtectedArea"  minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: byte, Value: [0](not used) OR [3](Space not violated) OR [6](Space violated)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:enumeration value ="0"></xs:enumeration>
+                                                                     <xs:enumeration value ="3"></xs:enumeration>
+                                                                     <xs:enumeration value ="6"></xs:enumeration>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="CartVel"  minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: double, Value: [0.5] - [30000] (mm/s)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:minInclusive value="0.5"/>
+                                                                     <xs:maxInclusive value="30000"/>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="ReferenceRobRoot"  minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: byte, Value: [0](false) - [1](true)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:enumeration value ="0"></xs:enumeration>
+                                                                     <xs:enumeration value ="1"></xs:enumeration>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="AxisRange"  minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  May contain up to 12 axes
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:sequence>
+                                                                  <xs:element name="Axis"  minOccurs="0" maxOccurs="24">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Attributes: Number[required]
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:all>
+                                                                           <xs:element  minOccurs="0" maxOccurs="1" name="AxisEnabled">
+                                                                              <xs:annotation>
+                                                                                 <xs:documentation>
+                                                                                    Type: byte, Value: [0](false) - [1](true)
+                                                                                 </xs:documentation>
+                                                                              </xs:annotation>
+                                                                              <xs:complexType>
+                                                                                 <xs:simpleContent>
+                                                                                    <xs:restriction base="boundaries">
+                                                                                       <xs:enumeration value ="0"></xs:enumeration>
+                                                                                       <xs:enumeration value ="1"></xs:enumeration>
+                                                                                    </xs:restriction>
+                                                                                 </xs:simpleContent>
+                                                                              </xs:complexType>
+                                                                           </xs:element>
+                                                                           <xs:element  minOccurs="0" maxOccurs="1" name="AxisLowerBound">
+                                                                              <xs:annotation>
+                                                                                 <xs:documentation>
+                                                                                    Type: double, Value: [-360] - [360](deg) OR [-10000] - [10000](mm)
+                                                                                 </xs:documentation>
+                                                                              </xs:annotation>
+                                                                              <xs:complexType>
+                                                                                 <xs:simpleContent>
+                                                                                    <xs:extension base="xs:double">
+                                                                                    </xs:extension>
+                                                                                 </xs:simpleContent>
+                                                                              </xs:complexType>
+                                                                           </xs:element>
+                                                                           <xs:element  minOccurs="0" maxOccurs="1" name="AxisUpperBound">
+                                                                              <xs:annotation>
+                                                                                 <xs:documentation>
+                                                                                    Type: double, Value: [-360] - [360](deg) OR [-10000] - [10000](mm)
+                                                                                 </xs:documentation>
+                                                                              </xs:annotation>
+                                                                              <xs:complexType>
+                                                                                 <xs:simpleContent>
+                                                                                    <xs:extension base="xs:double">
+                                                                                    </xs:extension>
+                                                                                 </xs:simpleContent>
+                                                                              </xs:complexType>
+                                                                           </xs:element>
+                                                                        </xs:all>
+                                                                        <xs:attribute name="Number" type="xs:byte" use="required" />
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                               </xs:sequence>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="CartesianRange" minOccurs="0" maxOccurs="1">
+                                                            <xs:complexType>
+                                                               <xs:sequence>
+                                                                  <xs:element name="X" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-100000] - [100000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-100000"/>
+                                                                              <xs:maxInclusive value="100000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="Y" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-100000] - [100000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-100000"/>
+                                                                              <xs:maxInclusive value="100000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="Z" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-100000] - [100000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-100000"/>
+                                                                              <xs:maxInclusive value="100000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="A" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-360] - [360](deg)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-360"/>
+                                                                              <xs:maxInclusive value="360"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="B" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-360] - [360](deg)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-360"/>
+                                                                              <xs:maxInclusive value="360"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="C" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-360] - [360](deg)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-360"/>
+                                                                              <xs:maxInclusive value="360"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="X1" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-100000] - [100000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-100000"/>
+                                                                              <xs:maxInclusive value="100000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="X2" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-100000] - [100000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-100000"/>
+                                                                              <xs:maxInclusive value="100000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="Y1" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-100000] - [100000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-100000"/>
+                                                                              <xs:maxInclusive value="100000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="Y2" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-100000] - [100000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-100000"/>
+                                                                              <xs:maxInclusive value="100000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="Z1" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-100000] - [100000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-100000"/>
+                                                                              <xs:maxInclusive value="100000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="Z2" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-100000] - [100000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-100000"/>
+                                                                              <xs:maxInclusive value="100000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                               </xs:sequence>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                      </xs:sequence>
+                                                      <xs:attribute name="Number" use="required">
+                                                         <xs:simpleType>
+                                                            <xs:restriction base="xs:byte">
+                                                               <xs:minInclusive value="1" />
+                                                               <xs:maxInclusive value="16"/>
+                                                            </xs:restriction>
+                                                         </xs:simpleType>
+                                                      </xs:attribute>
+                                                      <xs:attribute name="Name" type="xs:string" use="optional" />
+                                                   </xs:complexType>
+                                                </xs:element>
+                                             </xs:sequence>
+                                          </xs:complexType>
+                                          <xs:unique name="UniqueWorkspaceNumber">
+                                             <xs:selector xpath="WorkspaceMonitoring"/>
+                                             <xs:field xpath="@Number" />
+                                          </xs:unique>
+                                          <xs:unique name="UniqueWorkspaceName">
+                                             <xs:selector xpath="WorkspaceMonitoring"/>
+                                             <xs:field xpath="@Name" />
+                                          </xs:unique>
+                                       </xs:element>
+                                       <xs:element name="Tools"  minOccurs="0" maxOccurs="1">
+                                          <xs:annotation>
+                                             <xs:documentation>
+                                                May contain up to 16 tools
+                                             </xs:documentation>
+                                          </xs:annotation>
+                                          <xs:complexType>
+                                             <xs:sequence>
+                                                <xs:element name="Tool"  minOccurs="0" maxOccurs="16">
+                                                   <xs:annotation>
+                                                      <xs:documentation>
+                                                         Attributes: Number[required], Name[optional]
+                                                      </xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:complexType>
+                                                      <xs:sequence>
+                                                         <xs:element name="ToolEnabled" minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: byte, Value: [0](false) - [1](true)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:enumeration value ="0"></xs:enumeration>
+                                                                     <xs:enumeration value ="1"></xs:enumeration>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="TCPVector_X" minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: double, Value: [-10000] - [10000](mm)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:minInclusive value="-10000"/>
+                                                                     <xs:maxInclusive value="10000"/>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="TCPVector_Y" minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: double, Value: [-10000] - [10000](mm)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:minInclusive value="-10000"/>
+                                                                     <xs:maxInclusive value="10000"/>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="TCPVector_Z" minOccurs="0" maxOccurs="1">
+                                                            <xs:annotation>
+                                                               <xs:documentation>
+                                                                  Type: double, Value: [-10000] - [10000](mm)
+                                                               </xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:restriction base="boundaries">
+                                                                     <xs:minInclusive value="-10000"/>
+                                                                     <xs:maxInclusive value="10000"/>
+                                                                  </xs:restriction>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="Sphere" minOccurs="0" maxOccurs="6">
+                                                            <xs:complexType>
+                                                               <xs:sequence>
+                                                                  <xs:element name="SphereEnabled" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: byte, Value: [0](false) - [1](true)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:enumeration value ="0"></xs:enumeration>
+                                                                              <xs:enumeration value ="1"></xs:enumeration>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="X" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-10000] - [10000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-10000"/>
+                                                                              <xs:maxInclusive value="10000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="Y" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-10000] - [10000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-10000"/>
+                                                                              <xs:maxInclusive value="10000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="Z" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [-10000] - [10000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="-10000"/>
+                                                                              <xs:maxInclusive value="10000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                                  <xs:element name="Radius" minOccurs="0" maxOccurs="1">
+                                                                     <xs:annotation>
+                                                                        <xs:documentation>
+                                                                           Type: double, Value: [0] - [10000](mm)
+                                                                        </xs:documentation>
+                                                                     </xs:annotation>
+                                                                     <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                           <xs:restriction base="boundaries">
+                                                                              <xs:minInclusive value="0"/>
+                                                                              <xs:maxInclusive value="10000"/>
+                                                                           </xs:restriction>
+                                                                        </xs:simpleContent>
+                                                                     </xs:complexType>
+                                                                  </xs:element>
+                                                               </xs:sequence>
+                                                               <xs:attribute name="Number" type="xs:byte" use="required" />
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                      </xs:sequence>
+                                                      <xs:attribute name="Number" type="xs:byte" use="required" />
+                                                      <xs:attribute name="Name" type="xs:string" use="optional" />
+                                                   </xs:complexType>
+                                                </xs:element>
+                                             </xs:sequence>
+                                          </xs:complexType>
+                                       </xs:element>
+                                       <xs:element name="GlobalParameters"  minOccurs="0" maxOccurs="1">
+                                          <xs:annotation>
+                                             <xs:documentation>
+                                                Defines the global parameters
+                                             </xs:documentation>
+                                          </xs:annotation>
+                                          <xs:complexType>
+                                             <xs:all>
+                                                <xs:element name="MasteringTestInput"  minOccurs="0" maxOccurs="1">
+                                                   <xs:annotation>
+                                                      <xs:documentation>
+                                                         Type: byte, Value: [0](cabinet) - [1](profisafe)
+                                                      </xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:complexType>
+                                                      <xs:simpleContent>
+                                                         <xs:restriction base="boundaries">
+                                                            <xs:enumeration value ="0"></xs:enumeration>
+                                                            <xs:enumeration value ="1"></xs:enumeration>
+                                                         </xs:restriction>
+                                                      </xs:simpleContent>
+                                                   </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="GlobalCartVel"  minOccurs="0" maxOccurs="1">
+                                                   <xs:annotation>
+                                                      <xs:documentation>
+                                                         Type: double, Value: [0.5] - [30000](mm/s)
+                                                      </xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:complexType>
+                                                      <xs:simpleContent>
+                                                         <xs:restriction base="boundaries">
+                                                            <xs:minInclusive value="0.5"/>
+                                                            <xs:maxInclusive value="30000"/>
+                                                         </xs:restriction>
+                                                      </xs:simpleContent>
+                                                   </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="InpRedVelCartVel"  minOccurs="0" maxOccurs="1">
+                                                   <xs:annotation>
+                                                      <xs:documentation>
+                                                         Type: double, Value: [0.5] - [30000](mm/s)
+                                                      </xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:complexType>
+                                                      <xs:simpleContent>
+                                                         <xs:restriction base="boundaries">
+                                                            <xs:minInclusive value="0.5"/>
+                                                            <xs:maxInclusive value="30000"/>
+                                                         </xs:restriction>
+                                                      </xs:simpleContent>
+                                                   </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="T1CartVel"  minOccurs="0" maxOccurs="1">
+                                                   <xs:annotation>
+                                                      <xs:documentation>
+                                                         Type: double, Value: [0.5] - [250](mm/s)
+                                                      </xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:complexType>
+                                                      <xs:simpleContent>
+                                                         <xs:restriction base="boundaries">
+                                                            <xs:minInclusive value="0.5"/>
+                                                            <xs:maxInclusive value="250"/>
+                                                         </xs:restriction>
+                                                      </xs:simpleContent>
+                                                   </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="GlobalAxisVel_rot"  minOccurs="0" maxOccurs="1">
+                                                   <xs:annotation>
+                                                      <xs:documentation>
+                                                         Type: double, Value: [0.5] - [5000](°/s)
+                                                      </xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:complexType>
+                                                      <xs:simpleContent>
+                                                         <xs:restriction base="boundaries">
+                                                            <xs:minInclusive value="0.5"/>
+                                                            <xs:maxInclusive value="5000"/>
+                                                         </xs:restriction>
+                                                      </xs:simpleContent>
+                                                   </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="GlobalAxisVel_lin"  minOccurs="0" maxOccurs="1">
+                                                   <xs:annotation>
+                                                      <xs:documentation>
+                                                         Type: double, Value: [0.5] - [30000](°/s)
+                                                      </xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:complexType>
+                                                      <xs:simpleContent>
+                                                         <xs:restriction base="boundaries">
+                                                            <xs:minInclusive value="0.5"/>
+                                                            <xs:maxInclusive value="30000"/>
+                                                         </xs:restriction>
+                                                      </xs:simpleContent>
+                                                   </xs:complexType>
+                                                </xs:element>
+                                             </xs:all>
+                                          </xs:complexType>
+                                       </xs:element>
+                                    </xs:sequence>
+                                 </xs:complexType>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

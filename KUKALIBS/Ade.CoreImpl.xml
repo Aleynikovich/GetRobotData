@@ -1,0 +1,548 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ade.CoreImpl</name>
+    </assembly>
+    <members>
+        <member name="T:Ade.Documents.Document">
+            <summary>
+            Document that is managed by the DocumentHandler.
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.Document.#ctor(System.Uri,System.String,Ade.Documents.IDocumentProvider2,Ade.Documents.DocumentHandler)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Documents.Document"/> class.
+            </summary>
+            <param name="uri">The URI to the document.</param>
+            <param name="documentType">Type of the document.</param>
+            <param name="provider">The document provider.</param>
+            <param name="handler">The document handler.</param>
+        </member>
+        <member name="M:Ade.Documents.Document.SetData(System.Object,System.Boolean)">
+            <summary>
+            Sets the data.
+            </summary>
+            <param name="documentData">The document data.</param>
+            <param name="documentWriteAccess">if set to <c>true</c> data can be written.</param>
+        </member>
+        <member name="M:Ade.Documents.Document.OnUpdateData">
+            <summary>
+            Updates the data.
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.Document.AddReference">
+            <summary>
+            Increments the reference count.
+            </summary>
+            <remarks>
+            All clients remembering this document must call AddReference() to indicate that this document is used by the client.
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.Document.Release">
+            <summary>
+            Call this method to indicate that the document and its data can be released.
+            </summary>
+            <remarks>
+            All clients opening a document by calling OpenDocument should subsequently call this method
+            to indicate that this document and its containing data can be released by the framework.
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.Document.RequestWriteAccess">
+            <summary>
+            Request the document to increase its accessibility level from readonly access to write access.
+            <seealso cref="P:Ade.Documents.Document.ReadOnly"/>
+            </summary>
+            <returns>
+            True if write access is permitted, otherwise false.
+            The returned value should always logically correspond to <see cref="P:Ade.Documents.Document.ReadOnly"/>,
+            therefore calling this method on an already writable document should return true.
+            </returns>
+        </member>
+        <member name="M:Ade.Documents.Document.GetStream">
+            <summary>
+            Gets the stream with the content of <see cref="P:Ade.Documents.Document.Data"/>.
+            </summary>
+            <returns>
+            The stream with the content of <see cref="P:Ade.Documents.Document.Data"/>.
+            </returns>
+            <remarks>
+            This returned stream is read-only.
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.Document.Save">
+            <summary>
+            Save the data using the associated <see cref="T:Ade.Documents.IDocumentProvider2"/>.
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.Document.Uri">
+            <summary>
+            Gets the unified resource identifier (path to a file or other location).
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.Document.DocumentType">
+            <summary>
+            Gets the document type (usually the file extension).
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.Document.Provider">
+            <summary>
+            Gets the document provider interface (used to load and store the data).
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.Document.Data">
+            <summary>
+            Gets the data of the document.
+            </summary>
+            <remarks>
+            The data is not the concrete data to be used; instead a wrapper class is returned that contains the concrete data as a field member. 
+            </remarks>
+        </member>
+        <member name="P:Ade.Documents.Document.ReadOnly">
+            <summary>
+            Gets the readonly state of this document.
+            </summary>
+            <value>true, if the document is read only.</value>
+            <remarks>
+            The readonly state is usually set on creation of the document through the document provider.
+            A state of false indicates that changes to the document´s data are allowed, while a state of true disallows
+            any changes. In the latter case, clients can try to 'upgrade' to write access by calling <see cref="M:Ade.Documents.Document.RequestWriteAccess"/>.
+            </remarks>
+        </member>
+        <member name="P:Ade.Documents.Document.Ade#Documents#IDocument2#Provider">
+            <summary>
+            Gets the document provider interface (used to load and store the data).
+            </summary>
+            <value>The document provider.</value>
+        </member>
+        <member name="E:Ade.Documents.Document.UpdateData">
+            <summary>
+            Occurs to update the <see cref="P:Ade.Documents.Document.Data"/> property.
+            </summary>
+            <remarks>
+            AF raises this event on access to the <see cref="P:Ade.Documents.Document.Data"/> property. The subscriber (mostly an editor and only one subscriber) has to update the member behind the <see cref="P:Ade.Documents.Document.Data"/> property. 
+            The caller of the <see cref="P:Ade.Documents.Document.Data"/> property will retrieve then the updated data.
+            </remarks>
+        </member>
+        <member name="T:Ade.Documents.DocumentHandler">
+            <summary>
+            Document management 
+            </summary>
+            <remarks>
+            This can manage a collection of documents. 
+            These documents can be opened and closed independent from opening or closing an editor.
+            <para>Documents are read and written using implementations of the <see cref="T:Ade.Documents.IDocumentProvider2"/> interface.</para>
+            <para>The list of document provider implementations is defined in the XML configuration file in the Ade.Documents.DocumentProviders section.</para>
+            <para>A document is identified through its URI which can be a file with path or any other URI which can be read and written by a an IDocumentProvider2 implementation.</para>
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.DocumentHandler.GetProvider(System.String)">
+            <summary>
+            Gets the provider for the desired document type.
+            </summary>
+            <param name="doctype">The doctype.</param>
+            <returns>The provider.</returns>
+        </member>
+        <member name="M:Ade.Documents.DocumentHandler.OpenDocument(System.String,System.Object,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="documentType"></param>
+            <param name="data"></param>
+            <param name="writeAccess"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ade.Documents.DocumentHandler.Ade#Documents#IDocumentHandler#OpenDocument(System.String,System.Uri,System.Boolean)">
+            <summary>
+            Open a specified document using an <see cref="T:Ade.Documents.IDocumentProvider2"/>.
+            </summary>
+            <param name="documentType">Type of document that identifies the <see cref="T:Ade.Documents.IDocumentProvider2"/>.</param>
+            <param name="uri">URI of the document to open.</param>
+            <param name="writeAccess">if set to <c>true</c> the document will be opened with write access.</param>
+            <returns>The opened document.</returns>
+            <remarks>
+            	<para>The real work is done by an <see cref="T:Ade.Documents.IDocumentProvider2"/> which can be configured in the XML configuration file.</para>
+            	<para>The <paramref name="documentType"/> is either formated as a file extension or like a MIME type e.g. 'text/html' for this example there can be handlers for ither 'text/html', 'text' or ''.</para>
+            	<para>If there are several handlers that match the documentType, the most specific is used.</para>
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.DocumentHandler.Remove(Ade.Documents.Document)">
+            <summary>
+            Removes the specified document.
+            </summary>
+            <param name="document">The document.</param>
+        </member>
+        <member name="P:Ade.Documents.DocumentHandler.OpenDocuments">
+            <summary>
+            Gets a collection of currently opened documents.
+            </summary>
+        </member>
+        <member name="T:Ade.Documents.DocumentPosition">
+            <summary>
+            The position in a document described by the location fragment of an Uri
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.DocumentPosition.#ctor(System.Uri)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Documents.DocumentPosition"/> class using the Fragment of a given Uri.
+            </summary>
+            <param name="rangeUri">The URI with a location Fragment (e.g. ".../Code#1,1,1,20").</param>
+        </member>
+        <member name="M:Ade.Documents.DocumentPosition.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Documents.DocumentPosition"/> class.
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.DocumentPosition.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Documents.DocumentPosition"/> class.
+            </summary>
+            <param name="locationFragment">The location fragment.</param>
+        </member>
+        <member name="M:Ade.Documents.DocumentPosition.op_Addition(System.Uri,Ade.Documents.DocumentPosition)">
+            <summary>
+            Implements the operator + for coposing an Uri and a document range to an Uri with location Frament.
+            </summary>
+            <param name="uri">The URI.</param>
+            <param name="documentRange">The document range.</param>
+            <returns>
+            An Uri with the location Frament from the document range.
+            </returns>
+        </member>
+        <member name="P:Ade.Documents.DocumentPosition.LocationFragment">
+            <summary>
+            Gets or sets the location fragment.
+            </summary>
+            <value>
+            The location fragment.
+            </value>
+        </member>
+        <member name="T:Ade.Documents.TextDocumentPosition">
+            <summary>
+            A <see cref="T:Ade.Documents.DocumentPosition"/> for simple text using start line/column and end line/column
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.TextDocumentPosition.#ctor(System.Uri)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Documents.TextDocumentPosition"/> class.
+            </summary>
+            <param name="rangeUri">The URI with a location Fragment (e.g. ".../Code#1,1,1,20").</param>
+        </member>
+        <member name="M:Ade.Documents.TextDocumentPosition.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Documents.TextDocumentPosition"/> class.
+            </summary>
+            <param name="locationFragment">The location fragment.</param>
+        </member>
+        <member name="M:Ade.Documents.TextDocumentPosition.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Documents.TextDocumentPosition"/> class.
+            </summary>
+            <param name="startLine">The start line.</param>
+            <param name="startColumn">The start column.</param>
+            <param name="endLine">The end line.</param>
+            <param name="endColumn">The end column.</param>
+        </member>
+        <member name="M:Ade.Documents.TextDocumentPosition.Offset(System.Int32,System.Int32)">
+            <summary>
+            Offsets the specified line and column offset.
+            </summary>
+            <param name="lineOffset">The line offset.</param>
+            <param name="columnOffset">The column offset.</param>
+            <returns>The new Document Position with the offset added.</returns>
+        </member>
+        <member name="P:Ade.Documents.TextDocumentPosition.EndColumn">
+            <summary>
+            Gets or sets the end column.
+            </summary>
+            <value>
+            The end column.
+            </value>
+        </member>
+        <member name="P:Ade.Documents.TextDocumentPosition.EndLine">
+            <summary>
+            Gets or sets the end line.
+            </summary>
+            <value>
+            The end line.
+            </value>
+        </member>
+        <member name="P:Ade.Documents.TextDocumentPosition.StartColumn">
+            <summary>
+            Gets or sets the start column.
+            </summary>
+            <value>
+            The start column.
+            </value>
+        </member>
+        <member name="P:Ade.Documents.TextDocumentPosition.StartLine">
+            <summary>
+            Gets or sets the start line.
+            </summary>
+            <value>
+            The start line.
+            </value>
+        </member>
+        <member name="P:Ade.Documents.TextDocumentPosition.LocationFragment">
+            <summary>
+            Gets or sets the location fragment.
+            </summary>
+            <value>
+            The location fragment.
+            </value>
+        </member>
+        <member name="T:Ade.Documents.SimpleTextDocumentProvider">
+            <summary>
+            A Document Provider for simple text 
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.SimpleTextDocumentProvider.OpenDocument(System.Uri,System.String,System.Boolean,System.Boolean@)">
+            <summary>
+            Called to open a document from the specified <see cref="T:System.Uri"/>.
+            </summary>
+            <param name="uri">The URI from where to load the document.</param>
+            <param name="documentType">The document type.</param>
+            <param name="writeAccess">if set to <c>true</c> the document should be opened with write access.</param>
+            <param name="writeAccessAllowed">if set to <c>true</c> the document is opened with write access.</param>
+            <returns>
+            The data of the document that was opened.
+            </returns>
+            <remarks>
+            The data object must not be the concrete data; instead create a new class which contains the concrete data. 
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.SimpleTextDocumentProvider.OpenDocument(System.IO.Stream,System.String)">
+            <summary>
+            Called to open a document from the specified <paramref name="stream"/>.
+            </summary>
+            <param name="stream">The stream with the document data.</param>
+            <param name="documentType">The document type.</param>
+            <returns>
+            The data of the document that was opened.
+            </returns>
+            <remarks>
+            The data object must not be the concrete data; instead create a new class which contains the concrete data. 
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.SimpleTextDocumentProvider.SaveDocument(System.Uri,System.String,System.Object)">
+            <summary>
+            Called to save the specified document to the specified <see cref="T:System.Uri"/>.
+            </summary>
+            <param name="uri">The URI to where the document is stored.</param>
+            <param name="documentType">The document type.</param>
+            <param name="data">The document data.</param>
+        </member>
+        <member name="M:Ade.Documents.SimpleTextDocumentProvider.SaveDocument(System.IO.Stream,System.String,System.Object)">
+            <summary>
+            Called to save the specified document to the specified <paramref name="stream"/>.
+            </summary>
+            <param name="stream">The stream to where the document data is stored.</param>
+            <param name="documentType">The document type.</param>
+            <param name="data">The document data.</param>
+        </member>
+        <member name="M:Ade.Documents.SimpleTextDocumentProvider.UpdateDocument(System.Uri,System.String,System.Object)">
+            <summary>
+            Called to update the document data with the content stored at the specified <see cref="T:System.Uri"/>.
+            </summary>
+            <param name="uri">The URI where the document data is stored.</param>
+            <param name="documentType">The document type.</param>
+            <param name="data">The data to update.</param>
+            <remarks>
+            This method could be called by a version control system or or a file system watcher when the content of the document is changed externally.
+            The document provider can then update the document data object.
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.SimpleTextDocumentProvider.UpdateDocument(System.IO.Stream,System.String,System.Object)">
+            <summary>
+            Called to update the document data with the content stored in the specified <paramref name="stream"/>.
+            </summary>
+            <param name="stream">The stream where the document data is stored.</param>
+            <param name="documentType">The document type.</param>
+            <param name="data">The data to update.</param>
+            <remarks>
+            This method could be called by a version control system or or a file system watcher when the content of the document is changed externally.
+            The document provider can then update the document data object.
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.SimpleTextDocumentProvider.RequestWriteAccess(Ade.Documents.IDocument2)">
+            <summary>
+            Request the document provider to increase the document`s access level to write access.
+            </summary>
+            <param name="document">The document for which the write access is requested.</param>
+            <returns><c>true</c> if access is granted; otherwise <c>false</c>.</returns>
+            <remarks>
+            This method must be called for example by an editor or the project tree to rquest write access on a document that is handled by a version control system.
+            </remarks>
+        </member>
+        <member name="T:Ade.Search.SearchEngine">
+            <summary>
+            The search engine for documents
+            </summary>
+        </member>
+        <member name="M:Ade.Search.SearchEngine.FindNext(System.Uri,System.String,Ade.Search.SearchOptions)">
+            <summary>
+            Finds the next search result.
+            </summary>
+            <param name="currentDocumentPosition">The current document position.</param>
+            <param name="searchText">The search text.</param>
+            <param name="searchOptions">The search options.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ade.Search.SearchEngine.FindAll(System.String,Ade.Search.SearchOptions)">
+            <summary>
+            Finds all matching search results
+            </summary>
+            <param name="searchText">The search text.</param>
+            <param name="searchOptions">The search options.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ade.Search.SearchEngine.GetSearcher(Ade.Documents.IDocument2)">
+            <summary>
+            Get a searcher for a given document.
+            </summary>
+            <param name="document">The document to be searched.</param>
+            <returns>
+            The search object which can search the document.
+            </returns>
+        </member>
+        <member name="P:Ade.Search.SearchEngine.Documents">
+            <summary>
+            Gets or sets the documents to be searched.
+            </summary>
+            <value>
+            The documents.
+            </value>
+        </member>
+        <member name="P:Ade.Search.SearchEngine.SearchFactories">
+            <summary>
+            The search factories, read from configuration
+            </summary>
+        </member>
+        <member name="T:Ade.Internal.Tracing">
+            <summary>
+            Tracing helper class.
+            </summary>
+        </member>
+        <member name="T:Ade.Documents.UriResolver">
+            <summary>
+            URI resolver component
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.UriResolver.Initialize">
+            <summary>
+            Initializes the components
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.UriResolver.GetReadStream(System.Uri)">
+            <summary>
+            Resolves an URI to provide read access to its related data.
+            </summary>
+            <param name="uri">The URI to be resolved.</param>
+            <returns>
+            A readable stream of data associated with the given URI. <see cref="T:Ade.Documents.IUriProtocolResolver"/>
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+        <member name="M:Ade.Documents.UriResolver.GetWriteStream(System.Uri)">
+            <summary>
+            Resolves an URI to provide write access to its related data.
+            </summary>
+            <param name="uri">The URI to be resolved.</param>
+            <returns>
+            A writable stream of data associated with the given URI.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+        <member name="M:Ade.Documents.UriResolver.IsWritable(System.Uri)">
+            <summary>
+            Checks if write access is granted for the data associated with an URI (and therefore a writable stream can be accessed).
+            </summary>
+            <param name="uri">The URI (its related data) to check write access for.</param>
+            <returns>
+            	<c>True</c> if write access is granted, otherwise <c>false</c>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+        <member name="M:Ade.Documents.UriResolver.RequestWriteAccess(System.Uri)">
+            <summary>
+            Request an URI to increase the accessibility level of its related data from readonly to write access.
+            </summary>
+            <param name="uri">The URI a request is made for.</param>
+            <returns>
+            	<c>True</c> if write access is permitted, otherwise <c>false</c>
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+        <member name="M:Ade.Documents.UriResolver.Ade#Documents#IUriProtocolResolver#GetReadStream(System.Uri)">
+            <summary>
+            Resolves an URI to provide read access to its related data.
+            </summary>
+            <param name="uri">The URI to be resolved.</param>
+            <returns>
+            A readable stream of data associated with the given URI.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+        <member name="M:Ade.Documents.UriResolver.Ade#Documents#IUriProtocolResolver#GetWriteStream(System.Uri)">
+            <summary>
+            Resolves an URI to provide write access to its related data.
+            </summary>
+            <param name="uri">The URI to be resolved.</param>
+            <returns>
+            A writable stream of data associated with the given URI.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+        <member name="M:Ade.Documents.UriResolver.Ade#Documents#IUriProtocolResolver#IsWritable(System.Uri)">
+            <summary>
+            Checks if write access is granted for the data associated with an URI (and therefore a writable stream can be accessed).
+            </summary>
+            <param name="uri">The URI (its related data) to check write access for.</param>
+            <returns>
+            	<c>True</c> if write access is granted, otherwise <c>false</c>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+        <member name="M:Ade.Documents.UriResolver.Ade#Documents#IUriProtocolResolver#RequestWriteAccess(System.Uri)">
+            <summary>
+            Request an URI to increase the accessibility level of its related data from readonly to write access.
+            </summary>
+            <param name="uri">The URI a request is made for.</param>
+            <returns>
+            	<c>True</c> if write access is permitted, otherwise <c>false</c>
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+    </members>
+</doc>

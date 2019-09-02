@@ -1,0 +1,46 @@
+<KrcListMonitor Name="DigitalIO" Width="250">
+   <Tab Name="Inputs" UpperBound="$NUM_IN" Simulate="true">
+      <Column Type="Text" Name="Nr" Align="Right" Width="40">
+         <Text>#</Text>
+      </Column>
+      <Column Type="Dll" ShowIcon="true" Name="Value" Align="Center" Width="40">
+	     <Dll> 
+	        <Path>klmdigitalio.dll</Path>
+	        <Class>KUKARoboter.KRCListMonitor.DigitalInValue</Class>
+	     </Dll>
+	     <ShowIcon Value="False">Res\ledoff.ico</ShowIcon>
+	     <ShowIcon Value="True">Res\ledon.ico</ShowIcon>
+	  </Column>	
+	  <Column Type="Dll" Name="State" Align="Center" Width="50">
+	     <Dll>
+	        <Path>klmdigitalio.dll</Path>
+	        <Class>KUKARoboter.KRCListMonitor.DigitalInState</Class>
+	     </Dll>
+	  </Column>
+	   <Column Type="DB" Name="Name" Align="Left" Width="20" EditableForUser="0">
+	      <DB Module="IO" Key="IN_#" Default="DigitalInput"></DB>
+	   </Column>
+   </Tab>
+   <Tab Name="Outputs" UpperBound="$NUM_OUT" Simulate="true">
+      <Column Type="Text" Name="Nr" Align="Right" Width="40">
+         <Text>#</Text>
+      </Column>
+	   <Column Type="Dll" ShowIcon="true" Name="Value" Align="Center" Width="40">
+	     <Dll> 
+	        <Path>klmdigitalio.dll</Path>
+	        <Class>KUKARoboter.KRCListMonitor.DigitalOutValue</Class>
+	     </Dll>
+	     <ShowIcon Value="False">Res\ledoff.ico</ShowIcon>
+	     <ShowIcon Value="True">Res\ledon.ico</ShowIcon>
+	  </Column>	
+	  <Column Type="Dll" Name="State" Align="Center" Width="50">
+	     <Dll>
+	        <Path>klmdigitalio.dll</Path>
+	        <Class>KUKARoboter.KRCListMonitor.DigitalOutState</Class>
+	     </Dll>
+	  </Column>
+	   <Column Type="DB" Name="Name" Align="Left" Width="20" EditableForUser="0">
+	      <DB Module="IO" Key="OUT_#" Default="DigitalOutput"></DB>
+	   </Column>
+   </Tab>
+</KrcListMonitor>

@@ -1,0 +1,21 @@
+<KrcListMonitor Name="CyclicFlags" Width="250">
+   <Tab UpperBound="256">
+      <Column Type="Text" Name="Nr" Align="Right" Width="55">
+         <Text>#</Text>
+      </Column>
+	   <Column Type="Variable" ShowIcon="true" Name="Value" Align="Center" Width="34" EditableForUser="999">
+	      <Variable Type="BOOL" Name="$CYCFlag[]"></Variable>
+	      <ShowIcon Value="False">Res\ledoff.ico</ShowIcon>
+	      <ShowIcon Value="True">Res\ledon.ico</ShowIcon>
+	   </Column>
+	   <Column Type="DB" Name="Name" Align="Left" Width="90" EditableForUser="0">
+	      <DB Module="Notice" Key="NoticeText#" Default="Merker"></DB>
+	   </Column>
+	   <Column Type="Dll" Name="Definition" Align="Left" EditableForUser="0">
+	      <Dll>
+	         <Path>klmmarker.dll</Path>
+	         <Class>KUKARoboter.KRCListMonitor.MarkerDefinition</Class>
+	      </Dll>
+	   </Column>
+   </Tab>
+</KrcListMonitor>

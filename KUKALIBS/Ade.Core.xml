@@ -1,0 +1,1421 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ade.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Ade.Documents.AdeDocumentProviderNotFoundException">
+            <summary>
+            The exception that is thrown when the provider for a specific document type was not found.
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.AdeDocumentProviderNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Documents.AdeDocumentProviderNotFoundException"/> class.
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.AdeDocumentProviderNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Documents.AdeDocumentProviderNotFoundException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+        </member>
+        <member name="M:Ade.Documents.AdeDocumentProviderNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Documents.AdeDocumentProviderNotFoundException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Ade.Documents.AdeDocumentProviderNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Standard constructor.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="T:Ade.Devices.DeviceProfileValueProviderConfiguration">
+            <summary>
+            Configuration class to describe a component as a device profile value provicer for one or more attributes.
+            </summary>
+        </member>
+        <member name="P:Ade.Devices.DeviceProfileValueProviderConfiguration.AttributeNames">
+            <summary>
+            Gets or sets one or more attribute that are provided by the component.
+            </summary>
+            <remarks>Multiple attribute must be delimited by whitespace</remarks>
+        </member>
+        <member name="P:Ade.Devices.DeviceProfileValueProviderConfiguration.ComponentName">
+            <summary>
+            Gets or sets the name of the component that implements the device profile value provider.
+            </summary>
+        </member>
+        <member name="T:Ade.Documents.DocumentProviderConfiguration">
+            <summary>
+            XML configuration class for document providers.
+            </summary>
+            <remarks>
+            This configuration class is used to name components that can open and save documents 
+            (implement <see cref="T:Ade.Documents.IDocumentProvider"/>).
+            <para>See <see cref="T:Ade.Components.AdeComponentConfigurationListItem"/> for detailes about xml configuration classes.</para>
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.DocumentProviderConfiguration.GetDocumentTypeArray">
+            <summary>
+            Gets the document types as string array.
+            </summary>
+            <returns>Array of strings.</returns>
+        </member>
+        <member name="M:Ade.Documents.DocumentProviderConfiguration.ToString">
+            <summary>
+            Returns the component name of the <see cref="T:Ade.Documents.DocumentProviderConfiguration"/> object.
+            </summary>
+            <returns>A string that represents the object.</returns>
+        </member>
+        <member name="P:Ade.Documents.DocumentProviderConfiguration.DocumentTypes">
+            <summary>
+            Gets or sets a space separated list of document types that the provider can handle e.g. 'text/html .cs .st'.
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.DocumentProviderConfiguration.ComponentName">
+            <summary>
+            Gets or sets the component that implements the document provider interface (<see cref="T:Ade.Documents.IDocumentProvider"/>).
+            </summary>
+        </member>
+        <member name="T:Ade.Documents.UriProtocolResolverConfiguration">
+            <summary>
+            Configuration class to describe a component as a URI resolver for one or more specific protocols.
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.UriProtocolResolverConfiguration.#ctor">
+            <summary>
+            Constructor for UriProtocolResolverConfiguration
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.UriProtocolResolverConfiguration.Protocol">
+            <summary>
+            Gets or sets one or more protocols (schemes) that can be resolved by the component.
+            </summary>
+            <remarks>Multiple protocols must be delimited by whitespace</remarks>
+        </member>
+        <member name="P:Ade.Documents.UriProtocolResolverConfiguration.ComponentName">
+            <summary>
+            Gets or sets the name of the component that implements the URI resolver.
+            </summary>
+        </member>
+        <member name="T:Ade.Devices.BaseTypeConverter">
+            <summary>
+            Base class for type converters which are used to convert value of device profiles.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.BaseTypeConverter.ConvertToStringCore(System.IServiceProvider,System.Object)">
+            <summary>
+            Implementation of the conversion to <see cref="T:System.String"/>.
+            </summary>
+            <param name="serviceProvider">The service provider.</param>
+            <param name="value">The <see cref="T:System.Object"/> to convert.</param>
+            <returns>
+            An <see cref="T:System.String"/> that represents the value.
+            </returns>
+        </member>
+        <member name="M:Ade.Devices.BaseTypeConverter.ConvertFromStringCore(System.IServiceProvider,System.String)">
+            <summary>
+            Implementation of the conversion from <see cref="T:System.String"/>.
+            </summary>
+            <param name="serviceProvider">The service provider.</param>
+            <param name="text">The value as text.</param>
+            <returns>
+            An <see cref="T:System.Object"/> that represents the converted value.
+            </returns>
+        </member>
+        <member name="M:Ade.Devices.BaseTypeConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Returns whether this converter can convert an object of the given type to the type of this converter, using the specified context.
+            </summary>
+            <param name="context">An <see cref="T:System.ComponentModel.ITypeDescriptorContext"/> that provides a format context.</param>
+            <param name="sourceType">A <see cref="T:System.Type"/> that represents the type you want to convert from.</param>
+            <returns>
+            true if this converter can perform the conversion; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Ade.Devices.BaseTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Returns whether this converter can convert the object to the specified type, using the specified context.
+            </summary>
+            <param name="context">An <see cref="T:System.ComponentModel.ITypeDescriptorContext"/> that provides a format context.</param>
+            <param name="destinationType">A <see cref="T:System.Type"/> that represents the type you want to convert to.</param>
+            <returns>
+            true if this converter can perform the conversion; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Ade.Devices.BaseTypeConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+            Converts the given value object to the specified type, using the specified context and culture information.
+            </summary>
+            <param name="context">An <see cref="T:System.ComponentModel.ITypeDescriptorContext"/> that provides a format context.</param>
+            <param name="culture">A <see cref="T:System.Globalization.CultureInfo"/>. If null is passed, the current culture is assumed.</param>
+            <param name="value">The <see cref="T:System.Object"/> to convert.</param>
+            <param name="destinationType">The <see cref="T:System.Type"/> to convert the <paramref name="value"/> parameter to.</param>
+            <returns>
+            An <see cref="T:System.Object"/> that represents the converted value.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            The <paramref name="destinationType"/> parameter is null.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            The conversion cannot be performed.
+            </exception>
+        </member>
+        <member name="M:Ade.Devices.BaseTypeConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <summary>
+            Converts the given object to the type of this converter, using the specified context and culture information.
+            </summary>
+            <param name="context">An <see cref="T:System.ComponentModel.ITypeDescriptorContext"/> that provides a format context.</param>
+            <param name="culture">The <see cref="T:System.Globalization.CultureInfo"/> to use as the current culture.</param>
+            <param name="value">The <see cref="T:System.Object"/> to convert.</param>
+            <returns>
+            An <see cref="T:System.Object"/> that represents the converted value.
+            </returns>
+            <exception cref="T:System.NotSupportedException">
+            The conversion cannot be performed.
+            </exception>
+        </member>
+        <member name="T:Ade.Devices.DeviceProfileValueCollection`1">
+            <summary>
+            Base class for collections that are used as a value in an <see cref="T:Ade.Devices.IDeviceProfile"/>.
+            </summary>
+            <typeparam name="T">The type of elements in the collection.</typeparam>
+        </member>
+        <member name="T:Ade.Devices.IDeviceProfileValue">
+            <summary>
+            Provides methods and events for values that need a special handling for converting from or to a textual representation.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.IDeviceProfileValue.CombineWith(System.Object)">
+            <summary>
+            Combines the value of this instance with the specified value from the parent profile.
+            </summary>
+            <param name="value">The value to combine with.</param>
+            <returns>The combinated value of this instance and the specified value from the parent profile.</returns>
+            <remarks>
+            To override the specified value, return <c>this</c>.
+            </remarks>
+        </member>
+        <member name="M:Ade.Devices.DeviceProfileValueCollection`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.DeviceProfileValueCollection`1"/> class.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.DeviceProfileValueCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.DeviceProfileValueCollection`1"/> class.
+            </summary>
+            <param name="collection">The collection.</param>
+        </member>
+        <member name="M:Ade.Devices.DeviceProfileValueCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds the elements from the specified collection to this list.
+            </summary>
+            <param name="collection">The collection.</param>
+        </member>
+        <member name="M:Ade.Devices.DeviceProfileValueCollection`1.ClearItems">
+            <summary>
+            Removes all elements from the <see cref="T:System.Collections.ObjectModel.Collection`1"/>.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.DeviceProfileValueCollection`1.InsertItem(System.Int32,`0)">
+            <summary>
+            Inserts an element into the <see cref="T:System.Collections.ObjectModel.Collection`1"/> at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
+            <param name="item">The object to insert. The value can be null for reference types.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="index"/> is less than zero.
+            -or-
+            <paramref name="index"/> is greater than <see cref="P:System.Collections.ObjectModel.Collection`1.Count"/>.
+            </exception>
+        </member>
+        <member name="M:Ade.Devices.DeviceProfileValueCollection`1.RemoveItem(System.Int32)">
+            <summary>
+            Removes the element at the specified index of the <see cref="T:System.Collections.ObjectModel.Collection`1"/>.
+            </summary>
+            <param name="index">The zero-based index of the element to remove.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="index"/> is less than zero.
+            -or-
+            <paramref name="index"/> is equal to or greater than <see cref="P:System.Collections.ObjectModel.Collection`1.Count"/>.
+            </exception>
+        </member>
+        <member name="M:Ade.Devices.DeviceProfileValueCollection`1.SetItem(System.Int32,`0)">
+            <summary>
+            Replaces the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to replace.</param>
+            <param name="item">The new value for the element at the specified index. The value can be null for reference types.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="index"/> is less than zero.
+            -or-
+            <paramref name="index"/> is greater than <see cref="P:System.Collections.ObjectModel.Collection`1.Count"/>.
+            </exception>
+        </member>
+        <member name="M:Ade.Devices.DeviceProfileValueCollection`1.OnChanging">
+            <summary>
+            Called before this list is modified.
+            </summary>
+            <returns><c>true</c> if the value can be changed; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Ade.Devices.DeviceProfileValueCollection`1.OnChanged">
+            <summary>
+            Called after this list was modified.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.DeviceProfileValueCollection`1.CombineWith(System.Object)">
+            <summary>
+            Combines the value of this instance with the specified value from the parent profile.
+            </summary>
+            <param name="value">The value to combine with.</param>
+            <returns>
+            The combinated value of this instance and the specified value from the parent profile.
+            </returns>
+            <remarks>
+            To override the specified value, return <c>this</c>.
+            </remarks>
+        </member>
+        <member name="E:Ade.Devices.DeviceProfileValueCollection`1.ValueChanging">
+            <summary>
+            Occurs before this value is changed.
+            </summary>
+        </member>
+        <member name="E:Ade.Devices.DeviceProfileValueCollection`1.ValueChanged">
+            <summary>
+            Occurs after this value was changed.
+            </summary>
+        </member>
+        <member name="T:Ade.Devices.IDeviceInstanceProfileProvider">
+            <summary>
+            Provides methods for requesting device instance profiles.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.IDeviceInstanceProfileProvider.GetAllDeviceInstanceNames">
+            <summary>
+            Gets a collection of all device instance names.
+            </summary>
+            <returns>A collection of all device instance names.</returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceInstanceProfileProvider.GetDeviceInstanceProfile(System.String)">
+            <summary>
+            Gets the profile for the specified device instance.
+            </summary>
+            <param name="deviceInstanceName">The device instance name.</param>
+            <returns>The profile for the specified device instance.</returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceInstanceProfileProvider.ExistsDeviceInstanceProfile(System.String)">
+            <summary>
+            Checks whether a profile for the specified device instance exists.
+            </summary>
+            <param name="deviceInstanceName">The device instance name.</param>
+            <returns>
+            	<c>true</c> if a profile for the specified device instance exists; otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:Ade.Devices.IDeviceManagerService">
+            <summary>
+            Manages lists of profiles for specific device types and instances
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.GetAllDeviceTypeNames">
+            <summary>
+            Gets a collection that contains the names of all device types.
+            </summary>
+            <returns>A collection that contains the names of all device types.</returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.GetDeviceTypeProfile(System.String,System.Version)">
+            <summary>
+            Gets the profile with the specified version for the specified device type.
+            </summary>
+            <param name="deviceTypeName">The device type name.</param>
+            <param name="version">The version.</param>
+            <returns>The profile with the specified version for the specified device type.</returns>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileNotFoundException">The device type is not found -or- a profile with the specified version for the device type is not found.</exception>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.GetDeviceTypeProfile(System.String,System.String)">
+            <summary>
+            Gets the profile with the specified version for the specified device type.
+            </summary>
+            <param name="deviceTypeName">The device type name.</param>
+            <param name="version">The version string.</param>
+            <returns>The profile with the specified version for the specified device type.</returns>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileNotFoundException">The device type is not found -or- a profile with the specified version for the device type is not found.</exception>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.GetAllDeviceTypeProfiles(System.String)">
+            <summary>
+            Gets a list with all profiles for the specified device type.
+            </summary>
+            <param name="deviceTypeName">The device type name.</param>
+            <returns>A list with all profiles for the specified device type.</returns>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileNotFoundException">The device type is not found.</exception>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.ExistsDeviceTypeProfile(System.String)">
+            <summary>
+            Checks whether at least one profile for the specified device type exists.
+            </summary>
+            <param name="deviceTypeName">The device type name.</param>
+            <returns>
+            	<c>true</c> if at least one profile for the specified device type exists; otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.ExistsDeviceTypeProfile(System.String,System.Version)">
+            <summary>
+            Checks whether a profile with the specified version for the specified device type exists.
+            </summary>
+            <param name="deviceTypeName">The device type name.</param>
+            <param name="version">The version.</param>
+            <returns>
+            	<c>true</c> if a profile with the specified version for the specified device type exists; otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.ExistsDeviceTypeProfile(System.String,System.String)">
+            <summary>
+            Checks whether a profile with the specified version for the specified device type exists.
+            </summary>
+            <param name="deviceTypeName">The device type name.</param>
+            <param name="version">The version string.</param>
+            <returns>
+            	<c>true</c> if a profile with the specified version for the specified device type exists; otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.GetAllDeviceInstanceNames">
+            <summary>
+            Gets a collection that contains the names of all device instance.
+            </summary>
+            <returns>A collection that contains the names of all device instance.</returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.GetDeviceInstanceProfile(System.String)">
+            <summary>
+            Gets the profile for the specified device instance.
+            </summary>
+            <param name="deviceInstanceName">The device instance name.</param>
+            <returns>The profile for the specified device instance.</returns>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileNotFoundException">The device instance is not found.</exception>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.ExistsDeviceInstanceProfile(System.String)">
+            <summary>
+            Checks whether a profile for the specified device instance exists.
+            </summary>
+            <param name="deviceInstanceName">The device instance name.</param>
+            <returns>
+            	<c>true</c> if a profile for the specified device instance exists; otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.AddDeviceInstanceProfile(System.IO.TextReader)">
+            <summary>
+            Reads a device instance profile from the specified text reader and adds it to the collection of device instance profiles.
+            </summary>
+            <param name="textReader">The text reader which contains the textual device instance profile representation.</param>
+            <returns>
+            An <see cref="T:Ade.Devices.IDeviceProfile"/> instance which represent the content of the specified text reader.
+            </returns>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileNotFoundException">The content of the text reader contains no device instance profile.</exception>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileValueException">The 'Name' attribute of the device instance profile is not set -or- one of the properties 'ParentName' and 'ParentVersion' is not set to valid value.</exception>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileParserException">The content of the text reader cannot be parsed.</exception>
+            <remarks>
+            If the service <see cref="T:Ade.Devices.IDeviceInstanceProfileProvider"/> is available, the device instance profile will not be added to the 
+            collection of device instance profiles.
+            </remarks>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.CreateDeviceInstanceProfile(System.String,System.String)">
+            <summary>
+            Creates a device instance profile from the specified device type.
+            </summary>
+            <param name="deviceInstanceName">The device instance name.</param>
+            <param name="deviceType">The device type.</param>
+            <returns>
+            A device instance profile which is created from the specified device type.
+            </returns>
+            <remarks>The latest version of the device type will be used.<br/><br/>
+            If the service <see cref="T:Ade.Devices.IDeviceInstanceProfileProvider"/> is available, the device instance profile will not be added to the 
+            collection of device instance profiles.</remarks>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileNotFoundException">The specified device type is not found.</exception>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.CreateDeviceInstanceProfile(System.String,System.String,System.Version)">
+            <summary>
+            Creates a device instance profile from the specified device type.
+            </summary>
+            <param name="deviceInstanceName">The device instance name.</param>
+            <param name="deviceType">The device type.</param>
+            <param name="version">The device type version.</param>
+            <returns>
+            A device instance profile which is created from the specified device type.
+            </returns>
+            <remarks>
+            If the service <see cref="T:Ade.Devices.IDeviceInstanceProfileProvider"/> is available, the device instance profile will not be added to the 
+            collection of device instance profiles.
+            </remarks>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileNotFoundException">The specified device type is not found -or- the specified device type version is not found.</exception>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.CreateDeviceInstanceProfile(System.String,System.String,System.String)">
+            <summary>
+            Creates a device instance profile from the specified device type.
+            </summary>
+            <param name="deviceInstanceName">The device instance name.</param>
+            <param name="deviceType">The device type.</param>
+            <param name="version">The device type version.</param>
+            <returns>
+            A device instance profile which is created from the specified device type.
+            </returns>
+            <remarks>
+            If the service <see cref="T:Ade.Devices.IDeviceInstanceProfileProvider"/> is available, the device instance profile will not be added to the 
+            collection of device instance profiles.
+            </remarks>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileNotFoundException">The specified device type is not found -or- the specified device type version is not found.</exception>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.RemoveDeviceInstanceProfile(Ade.Devices.IDeviceProfile)">
+            <summary>
+            Removes the specified device instance profile.
+            </summary>
+            <param name="deviceInstanceProfile">The device instance profile.</param>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileNotFoundException">The device instance is not found.</exception>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileOperationNotSupportedException">The <see cref="T:Ade.Devices.IDeviceInstanceProfileProvider"/> service is present.</exception>
+            <remarks>
+            This operation is not supported if the <see cref="T:Ade.Devices.IDeviceInstanceProfileProvider"/> service is present.
+            </remarks>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.RemoveDeviceInstanceProfile(System.String)">
+            <summary>
+            Removes the profile of the specified device instance.
+            </summary>
+            <param name="deviceInstanceName">Name of the device instance.</param>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileNotFoundException">The device instance is not found.</exception>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileOperationNotSupportedException">The <see cref="T:Ade.Devices.IDeviceInstanceProfileProvider"/> service is present.</exception>
+            <remarks>
+            This operation is not supported if the <see cref="T:Ade.Devices.IDeviceInstanceProfileProvider"/> service is present.
+            </remarks>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.RemoveAllDeviceInstanceProfiles">
+            <summary>
+            Removes all device instance profiles.
+            </summary>
+            <exception cref="T:Ade.Devices.AdeDeviceProfileOperationNotSupportedException">The <see cref="T:Ade.Devices.IDeviceInstanceProfileProvider"/> service is present.</exception>
+            <remarks>
+            This operation is not supported if the <see cref="T:Ade.Devices.IDeviceInstanceProfileProvider"/> service is present.
+            </remarks>
+        </member>
+        <member name="M:Ade.Devices.IDeviceManagerService.WriteDeviceProfile(System.IO.TextWriter,Ade.Devices.IDeviceProfile)">
+            <summary>
+            Writes the textual representation of the device profile to the specified text writer.
+            </summary>
+            <param name="textWriter">The text writer.</param>
+            <param name="deviceProfile">The device profile.</param>
+        </member>
+        <member name="P:Ade.Devices.IDeviceManagerService.SimulationModeEnabled">
+            <summary>
+            Gets or sets a value indicating whether the simulation mode is enabled.
+            </summary>
+            <value>
+            	<c>true</c> if the simulation mode is enabled; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="E:Ade.Devices.IDeviceManagerService.SimulationModeEnabledChanged">
+            <summary>
+            Occurs when the value of the property <see cref="P:Ade.Devices.IDeviceManagerService.SimulationModeEnabled"/> was changed.
+            </summary>
+        </member>
+        <member name="T:Ade.Devices.IDeviceProfile">
+            <summary>
+            Represents the description of a device type or instance.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.IDeviceProfile.GetAttributeNames">
+            <summary>
+            Gets a collection of existing attributes in this device profile.
+            </summary>
+            <returns>A collection of existing attributes in this device profile.</returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceProfile.GetValue``1(System.String)">
+            <summary>
+            Gets the value of the specified attribute.
+            </summary>
+            <typeparam name="T">The value type.</typeparam>
+            <param name="attributeName">The attribute name.</param>
+            <returns>The value of the specified attribute</returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceProfile.SetValue(System.String,System.Object)">
+            <summary>
+            Sets a value for the specified attribute name.
+            </summary>
+            <param name="attributeName">The attribute name.</param>
+            <param name="value">The attribute value.</param>
+            <remarks>
+            The value will be persisted.
+            </remarks>
+        </member>
+        <member name="M:Ade.Devices.IDeviceProfile.SetValue(System.String,System.Object,System.Boolean)">
+            <summary>
+            Sets a value for the specified attribute name.
+            </summary>
+            <param name="attributeName">The attribute name.</param>
+            <param name="value">The attribute value.</param>
+            <param name="persistent">if set to <c>true</c> the value will be persisted.</param>
+        </member>
+        <member name="M:Ade.Devices.IDeviceProfile.ExistsValue(System.String)">
+            <summary>
+            Checks whether a value with the specified attribute name exists.
+            </summary>
+            <param name="attributeName">The attribute name.</param>
+            <returns><c>true</c> if a value with the specified attribute name exists; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceProfile.IsValuePersistent(System.String)">
+            <summary>
+            Determines whether the value with the specified attribute will be persisted.
+            </summary>
+            <param name="attributeName">The attribute name.</param>
+            <returns>
+            	<c>true</c> if the value with the specified attribute will be persisted; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Ade.Devices.IDeviceProfile.RemoveValue(System.String)">
+            <summary>
+            Removes the value with the specified attribute.
+            </summary>
+            <param name="attributeName">The attribute name.</param>
+        </member>
+        <member name="M:Ade.Devices.IDeviceProfile.RemoveAllValues">
+            <summary>
+            Removes all values.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.IDeviceProfile.CopyFiles(System.String)">
+            <summary>
+            Copies the files that are included in this profile to the specified destination path.
+            </summary>
+            <param name="destinationPath">The destination path.</param>
+        </member>
+        <member name="P:Ade.Devices.IDeviceProfile.Name">
+            <summary>
+            Gets or sets the name of this device profile.
+            </summary>
+            <value>The name of this device profile.</value>
+        </member>
+        <member name="P:Ade.Devices.IDeviceProfile.Version">
+            <summary>
+            Gets the version of this profile.
+            </summary>
+            <value>The version of this profile.</value>
+        </member>
+        <member name="P:Ade.Devices.IDeviceProfile.Description">
+            <summary>
+            Gets a description that can be shown in an UI.
+            </summary>
+            <value>A description that can be shown in an UI.</value>
+        </member>
+        <member name="P:Ade.Devices.IDeviceProfile.UpdateType">
+            <summary>
+            Gets or sets a value that defines the behavior of the update mechanism.
+            </summary>
+            <value>A value that defines the behavior of the update mechanism.</value>
+        </member>
+        <member name="P:Ade.Devices.IDeviceProfile.Parent">
+            <summary>
+            Gets or sets the profile this device profile is inherited from.
+            </summary>
+            <value>The profile this device profile is inherited from or <c>null</c> if the profile has no parent.</value>
+        </member>
+        <member name="E:Ade.Devices.IDeviceProfile.Changing">
+            <summary>
+            Occurs before the profile is changed.
+            </summary>
+        </member>
+        <member name="E:Ade.Devices.IDeviceProfile.Changed">
+            <summary>
+            Occurs after the profile was changed.
+            </summary>
+        </member>
+        <member name="P:Ade.Devices.IDeviceProfile.IsChanged">
+            <summary>
+            Gets a value indicating whether this device profile was changed.
+            </summary>
+            <value>
+            	<c>true</c> if this device profile was changed; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Ade.Devices.IDeviceProfileValueProvider">
+            <summary>
+            Provides methods to update a specific value dynamically.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.IDeviceProfileValueProvider.UpdateValue(Ade.Devices.IDeviceProfile,System.String)">
+            <summary>
+            Updates the value in the specified device profile.
+            </summary>
+            <param name="deviceProfile">The device profile.</param>
+            <param name="attributeName">The attribute name.</param>
+            <remarks>
+            This method will be called before the value in the specified device profile is read.
+            </remarks>
+        </member>
+        <member name="T:Ade.Devices.UpdateType">
+            <summary>
+            Specifies the behavior of the update mechanism
+            </summary>
+        </member>
+        <member name="F:Ade.Devices.UpdateType.AskUser">
+            <summary>
+            The user will be ask whether the profile shall be updated.
+            </summary>
+        </member>
+        <member name="F:Ade.Devices.UpdateType.Automatic">
+            <summary>
+            The profile will be updated automatically.
+            </summary>
+        </member>
+        <member name="F:Ade.Devices.UpdateType.Manual">
+            <summary>
+            The profile will not be updated.
+            </summary>
+        </member>
+        <member name="T:Ade.Documents.IDocumentHandler">
+            <summary>
+            Document management 
+            </summary>
+            <remarks>
+            This can manage a collection of documents. 
+            These documents can be opened and closed independent from opening or closing an editor.
+            <para>Documents are read and written using implementations of the <see cref="T:Ade.Documents.IDocumentProvider2"/> interface.</para>
+            <para>The list of document prvider implementations is defined in the XML configuration file in the Ade.Documents.DocumentProviders section.</para>
+            <para>A document is identified through its URI which can be a file with path or any other URI which can be read and written by a an IDocumentProvider implementation.</para>
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.IDocumentHandler.OpenDocument(System.String,System.Object,System.Boolean)">
+            <summary>
+            Create a new document and initialize it with the specified data.
+            </summary>
+            <param name="documentType">Type of document.</param>
+            <param name="data">Data for the new document.</param>
+            <param name="writeAccess">True to indicate that write access to the document´s data is needed.</param>
+            <returns>Returns the document object.</returns>
+        </member>
+        <member name="M:Ade.Documents.IDocumentHandler.OpenDocument(System.String,System.Uri,System.Boolean)">
+            <summary>
+            Open a specified document using an <see cref="T:Ade.Documents.IDocumentProvider2"/>.
+            </summary>
+            <remarks>
+            <para>The real work is done by an <see cref="T:Ade.Documents.IDocumentProvider2"/> which can be configured in the XML configuration file.</para>
+            <para>The <paramref name="documentType"/> is either formated as a file extension or like a MIME type e.g. 'text/html' for this example there can be handlers for ither 'text/html', 'text' or ''.</para>
+            <para>If there are several handlers that match the documentType, the most specific is used.</para>
+            </remarks>
+            <param name="uri">URI of the document to open.</param>
+            <param name="documentType">Type of document that identifies the <see cref="T:Ade.Documents.IDocumentProvider2"/>.</param>
+            <param name="writeAccess">True to indicate that write access to the document´s data is needed.</param>
+            <returns>The opened document.</returns>
+        </member>
+        <member name="P:Ade.Documents.IDocumentHandler.OpenDocuments">
+            <summary>
+            Gets a collection of currently opened documents.
+            </summary>
+        </member>
+        <member name="T:Ade.Devices.AdeDeviceProfileException">
+            <summary>
+            Base class for an exception that is thrown when an error occurs during reading a <see cref="T:Ade.Devices.IDeviceProfile"/> from 
+            a text reader or when performing actions on it like requesting values. This exception can also be thrown if an error 
+            occurs during executing methods of the <see cref="T:Ade.Devices.IDeviceManagerService"/>.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileException"/> class.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructor which is used to deserialize this exception.
+            </summary>
+            <param name="info">The serialization info.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Ade.Devices.AdeDeviceProfileNotFoundException">
+            <summary>
+            An exception that is thrown if a device type, a device instance or a specific device type profile version 
+            cannot be found.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileNotFoundException"/> class.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileNotFoundException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileNotFoundException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructor which is used to deserialize this exception.
+            </summary>
+            <param name="info">The serialization info.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Ade.Devices.AdeDeviceProfileParserException">
+            <summary>
+            An exception that is thrown when an error occurs during reading a <see cref="T:Ade.Devices.IDeviceProfile"/> from a text reader or
+            when performing actions on it like requesting values. This exception can also be thrown if an error occurs during 
+            executing methods of the <see cref="T:Ade.Devices.IDeviceManagerService"/>.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileParserException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileParserException"/> class.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileParserException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileParserException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileParserException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileParserException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileParserException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructor which is used to deserialize this exception.
+            </summary>
+            <param name="info">The serialization info.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Ade.Devices.AdeDeviceProfileValueException">
+            <summary>
+            An exception that is thrown if an error occurs during getting or setting a device profile value.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileValueException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileValueException"/> class.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileValueException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileValueException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileValueException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileValueException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileValueException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructor which is used to deserialize this exception.
+            </summary>
+            <param name="info">The serialization info.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Ade.Devices.AdeDeviceProfileOperationNotSupportedException">
+            <summary>
+            An exception that is thrown when an operation is performed that is not supported. An example for such an
+            operation is when trying to remove any device instance profile while a component provides the 
+            <see cref="T:Ade.Devices.IDeviceInstanceProfileProvider"/> service.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileOperationNotSupportedException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileOperationNotSupportedException"/> class.
+            </summary>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileOperationNotSupportedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileOperationNotSupportedException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileOperationNotSupportedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Devices.AdeDeviceProfileOperationNotSupportedException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for this exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Ade.Devices.AdeDeviceProfileOperationNotSupportedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructor which is used to deserialize this exception.
+            </summary>
+            <param name="info">The serialization info.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Ade.Search.SearchFactoryConfiguration">
+            <summary>
+            XML configuration class for search handler (components that implement <see cref="T:Ade.Search.ISearcherFactory"/>).
+            </summary>
+            <remarks>
+            <para>See <see cref="T:Ade.Components.AdeComponentConfigurationListItem"/> for detailes about xml configuration classes.</para>
+            </remarks>
+            <exclude/>
+        </member>
+        <member name="M:Ade.Search.SearchFactoryConfiguration.GetDocumentTypeArray">
+            <summary>
+            Gets the document types as string array.
+            </summary>
+            <returns>Array of strings.</returns>
+        </member>
+        <member name="M:Ade.Search.SearchFactoryConfiguration.ToString">
+            <summary>
+            Returns the component name of the <see cref="T:Ade.Documents.DocumentProviderConfiguration"/> object.
+            </summary>
+            <returns>A string that represents the object.</returns>
+        </member>
+        <member name="P:Ade.Search.SearchFactoryConfiguration.DocumentTypes">
+            <summary>
+            Gets or sets a space separated list of document types that the search handler can handle e.g. 'text/html .cs .st'.
+            </summary>
+        </member>
+        <member name="P:Ade.Search.SearchFactoryConfiguration.ComponentName">
+            <summary>
+            Gets or sets the component that implements the search handler interface (<see cref="T:Ade.Search.ISearcherFactory"/>).
+            </summary>
+        </member>
+        <member name="T:Ade.Search.ISearchEngine">
+            <summary>
+            The Interface for Search engines
+            </summary>
+            <exclude/>
+        </member>
+        <member name="M:Ade.Search.ISearchEngine.FindNext(System.Uri,System.String,Ade.Search.SearchOptions)">
+            <summary>
+            Finds the next search result.
+            </summary>
+            <param name="currentDocumentPosition">The current document position.</param>
+            <param name="searchText">The search text.</param>
+            <param name="searchOptions">The search options.</param>
+            <returns>A <see cref="T:Ade.Search.SearchResult"/> value representing the result of the 'FindNext' operation.</returns>
+        </member>
+        <member name="M:Ade.Search.ISearchEngine.FindAll(System.String,Ade.Search.SearchOptions)">
+            <summary>
+            Finds all matching search results
+            </summary>
+            <param name="searchText">The search text.</param>
+            <param name="searchOptions">The search options.</param>
+            <returns>A list of <see cref="T:Ade.Search.SearchResult"/> values, each representing the result of the a single search operation.</returns>
+        </member>
+        <member name="M:Ade.Search.ISearchEngine.GetSearcher(Ade.Documents.IDocument2)">
+            <summary>
+            Gets the searcher for a document.
+            </summary>
+            <param name="document">The  document to be searched.</param>
+            <returns>A <see cref="T:Ade.Search.ISearcher"/> interface representing a searcher.</returns>
+        </member>
+        <member name="P:Ade.Search.ISearchEngine.Documents">
+            <summary>
+            Gets or sets the documents to be searched.
+            </summary>
+            <value>
+            The documents.
+            </value>
+        </member>
+        <member name="T:Ade.Search.SearchOptions">
+            <summary>
+            The search options
+            </summary>
+            <exclude/>
+        </member>
+        <member name="P:Ade.Search.SearchOptions.CaseSensitive">
+            <summary>
+            case insensitive search
+            </summary>
+        </member>
+        <member name="P:Ade.Search.SearchOptions.MatchWholeWord">
+            <summary>
+            check word boundaries
+            </summary>
+        </member>
+        <member name="P:Ade.Search.SearchOptions.UseRegularExpressions">
+            <summary>
+            do a regular expression search
+            </summary>
+        </member>
+        <member name="P:Ade.Search.SearchOptions.SearchUpwards">
+            <summary>
+            search direction: if false: down; if true: up; 
+            </summary>
+        </member>
+        <member name="P:Ade.Search.SearchOptions.WrapSearch">
+            <summary>
+            wrap search: if false: stop at end of file; if true: after end of file start from the beginning; 
+            </summary>
+        </member>
+        <member name="P:Ade.Search.SearchOptions.UseWildcards">
+            <summary>
+            Wildcard search.
+            </summary>
+        </member>
+        <member name="T:Ade.Search.SearchResult">
+            <summary>
+            The search result.
+            </summary>
+            <exclude/>
+        </member>
+        <member name="M:Ade.Search.SearchResult.#ctor(System.String,System.Uri)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <param name="uri"></param>
+        </member>
+        <member name="P:Ade.Search.SearchResult.Context">
+            <summary>
+            a string which shows the document-part which contains the searched string
+            </summary>
+        </member>
+        <member name="P:Ade.Search.SearchResult.Uri">
+            <summary>
+            the Uri of the found object
+            </summary>
+        </member>
+        <member name="P:Ade.Search.SearchResult.Found">
+            <summary>
+            Gets a value indicating whether this <see cref="T:Ade.Search.SearchResult"/> is found.
+            </summary>
+            <value>
+              <c>true</c> if found; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Ade.Search.SearchResult.Empty">
+            <summary>
+            Gets the empty search result.
+            </summary>
+        </member>
+        <member name="T:Ade.Search.ISearcher">
+            <summary>
+            Interface for Searchers
+            </summary>
+            <exclude/>
+        </member>
+        <member name="M:Ade.Search.ISearcher.FindAll(System.String,Ade.Search.SearchOptions)">
+            <summary>
+            Search the given Document for a search string.
+            </summary>
+            <param name="searchText">the string to search.</param>
+            <param name="searchOptions">the search options.</param>
+            <returns>An enumerable of SearchResults which denote the found objects.</returns>
+        </member>
+        <member name="M:Ade.Search.ISearcher.FindNext(System.Uri,System.String,Ade.Search.SearchOptions)">
+            <summary>
+            Search the next object in the given Document for a search string.
+            </summary>
+            <param name="documentPosition">the document Uri with the Fragment poiting to the object where to start the search. if null, start from beginning.</param>
+            <param name="searchText">the string to search.</param>
+            <param name="searchOptions">the search options.</param>
+            <returns>A SearchResult which denote the next found object.</returns>
+        </member>
+        <member name="P:Ade.Search.ISearcher.Document">
+            <summary>
+            The searched Document.
+            </summary>
+        </member>
+        <member name="T:Ade.Search.ISearcherFactory">
+            <summary>
+            The interface for search factories.
+            </summary>
+            <exclude/>
+        </member>
+        <member name="M:Ade.Search.ISearcherFactory.CreateSearcher(Ade.Documents.IDocument2)">
+            <summary>
+            Creates the searcher for a given document.
+            </summary>
+            <param name="document">The document to be searched.</param>
+            <returns>The searcher.</returns>
+        </member>
+        <member name="T:Ade.Documents.DocumentDataEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Ade.Documents.IDocument2.UpdateData"/> event.
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.DocumentDataEventArgs.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ade.Documents.DocumentDataEventArgs"/> class.
+            </summary>
+            <param name="data">The data to update.</param>
+        </member>
+        <member name="P:Ade.Documents.DocumentDataEventArgs.Data">
+            <summary>
+            Gets or sets the updated data.
+            </summary>
+            <value>The updated data.</value>
+        </member>
+        <member name="T:Ade.Documents.IDocument">
+            <summary>
+            Document that is managed by the document provider.
+            </summary>
+            <exclude/>
+        </member>
+        <member name="M:Ade.Documents.IDocument.Save">
+            <summary>
+            Save to the data using the associated <see cref="T:Ade.Documents.IDocumentProvider"/>.
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.IDocument.Uri">
+            <summary>
+            Gets the unified resource identifier (path to a file or other location).
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.IDocument.DocumentType">
+            <summary>
+            Gets the document type (usually the file extension)
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.IDocument.Provider">
+            <summary>
+            Gets the document provider interface (used to load and store the data).
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.IDocument.Data">
+            <summary>
+            Gets or sets the data of the document.
+            </summary>
+        </member>
+        <member name="T:Ade.Documents.IDocument2">
+            <summary>
+            Document that is managed by the Document handler.
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.IDocument2.GetStream">
+            <summary>
+            Gets the stream with the content of <see cref="P:Ade.Documents.IDocument2.Data"/>.
+            </summary>
+            <returns>The stream with the content of <see cref="P:Ade.Documents.IDocument2.Data"/>.</returns>
+            <remarks>
+            This returned stream is read-only.
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.IDocument2.Save">
+            <summary>
+            Save to the data using the associated <see cref="T:Ade.Documents.IDocumentProvider2"/>.
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.IDocument2.AddReference">
+            <summary>
+            Call this method to increments the reference count of the document.
+            </summary>
+            <remarks>
+            All clients remembering this document must call AddReference() to indicate that this document is used by the client.
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.IDocument2.Release">
+            <summary>
+            Call this method to indicate that the document and its data can be released.
+            </summary>
+            <remarks>
+            All clients opening a document by calling OpenDocument should subsequently call this method
+            to indicate that this document and its containing data can be released by the framework.
+            The reference count will be decremented.
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.IDocument2.RequestWriteAccess">
+            <summary>
+            Request the document to increase its accessibility level from readonly access to write access.
+            <seealso cref="P:Ade.Documents.IDocument2.ReadOnly"/>
+            </summary>
+            <returns>True if write access is permitted, otherwise false.
+            The returned value should always logically correspond to <see cref="P:Ade.Documents.IDocument2.ReadOnly"/>,
+            therefore calling this method on an already writable document should return true.</returns>
+        </member>
+        <member name="P:Ade.Documents.IDocument2.Uri">
+            <summary>
+            Gets the unified resource identifier (path to a file or other location).
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.IDocument2.DocumentType">
+            <summary>
+            Gets the document type (usually the file extension)
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.IDocument2.Provider">
+            <summary>
+            Gets the document provider interface (used to load and store the data).
+            </summary>
+        </member>
+        <member name="P:Ade.Documents.IDocument2.Data">
+            <summary>
+            Gets the data of the document.
+            </summary>
+            <remarks>
+            The data is not the concrete data to be used; instead a wrapper class is returned that contains the concrete data as a field member. 
+            </remarks>
+        </member>
+        <member name="E:Ade.Documents.IDocument2.UpdateData">
+            <summary>
+            Occurs to update the <see cref="P:Ade.Documents.IDocument2.Data"/> property.
+            </summary>
+            <remarks>
+            AF raises this event on access to the <see cref="P:Ade.Documents.IDocument2.Data"/> property. The subscriber (mostly an editor and only one subscriber) has to update the member behind the <see cref="P:Ade.Documents.IDocument2.Data"/> property. 
+            The caller of the <see cref="P:Ade.Documents.IDocument2.Data"/> property will retrieve then updated data.
+            </remarks>
+        </member>
+        <member name="P:Ade.Documents.IDocument2.ReadOnly">
+             <summary>
+             Gets the readonly state of this document.
+             </summary>
+            <remarks>
+             The readonly state is usually set on creation of the document through the document provider.
+             A state of false indicates that changes to the document´s data are allowed, while a state of true disallows
+             any changes. In the latter case, clients can try to 'upgrade' to write access by calling <see cref="M:Ade.Documents.IDocument2.RequestWriteAccess"/>.
+            </remarks>
+        </member>
+        <member name="T:Ade.Documents.IDocumentCollection">
+            <summary>
+            Document management of the UIFramework.
+            </summary>
+            <remarks>
+            The UIFramework can manage a collection of documents. 
+            These documents can be opened and closed independent from opening or closing an editor.
+            <para>Documents are read and written using implementations of the <see cref="T:Ade.Documents.IDocumentProvider"/> interface.</para>
+            <para>The list of document provider implementations is defined in the XML configuration file in the Ade.Documents.DocumentProviders section.</para>
+            <para>A document is identified through its URI which can be a file with path or any other URI which can be read and written by a an IDocumentProvider implementation.</para>
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.IDocumentCollection.OpenDocument(System.String,System.Object)">
+            <summary>
+            Create a new document and initialize it with the specified data.
+            </summary>
+            <param name="documentType">Type of document.</param>
+            <param name="data">Data for the new document.</param>
+            <returns>Returns the document object.</returns>
+        </member>
+        <member name="M:Ade.Documents.IDocumentCollection.OpenDocument(System.String,System.Uri)">
+            <summary>
+            Open a specified document using an <see cref="T:Ade.Documents.IDocumentProvider"/>.
+            </summary>
+            <remarks>
+            <para>The real work is done by an <see cref="T:Ade.Documents.IDocumentProvider"/> which can be configured in the XML configuration file.</para>
+            <para>The <paramref name="documentType"/> is either formated as a file extension or like a MIME type e.g. 'text/html' for this example there can be handlers for ither 'text/html', 'text' or ''.</para>
+            <para>If there are several handlers that match the documentType, the most specific is used.</para>
+            </remarks>
+            <param name="uri">URI of the document to open.</param>
+            <param name="documentType">Type of document that identifies the <see cref="T:Ade.Documents.IDocumentProvider"/>.</param>
+            <returns>The opened document.</returns>
+        </member>
+        <member name="T:Ade.Documents.IDocumentProvider">
+            <summary>
+            Interface for components that implement handlers for <see cref="M:Ade.Documents.IDocumentCollection.OpenDocument(System.String,System.Uri)"/>.
+            </summary>
+            <remarks>
+            Implement this interface to handle opening of a specific document type.
+            See <see cref="M:Ade.Documents.IDocumentCollection.OpenDocument(System.String,System.Uri)"/> for detailes.
+            </remarks>
+            <exclude/>
+        </member>
+        <member name="M:Ade.Documents.IDocumentProvider.OpenDocument(Ade.Documents.IDocument)">
+            <summary>
+            Open a document from the specified <see cref="T:Ade.Documents.IDocument"/>.
+            </summary>
+            <param name="document">Document with an URI and document type to open.</param>
+            <returns>The data of the document that was opened.</returns>
+        </member>
+        <member name="M:Ade.Documents.IDocumentProvider.SaveDocument(Ade.Documents.IDocument)">
+            <summary>
+            Saves the specified document (data and URI is stored in the <see cref="T:Ade.Documents.IDocument"/>.
+            </summary>
+            <param name="document">Document data and URI to store</param>
+        </member>
+        <member name="T:Ade.Documents.IDocumentProvider2">
+            <summary>
+            Interface for document handling by a document specific document provider.
+            </summary>
+        </member>
+        <member name="M:Ade.Documents.IDocumentProvider2.OpenDocument(System.Uri,System.String,System.Boolean,System.Boolean@)">
+            <summary>
+            Called to open a document from the specified <see cref="T:System.Uri"/>.
+            </summary>
+            <param name="uri">The URI from where to load the document.</param>
+            <param name="documentType">The document type.</param>
+            <param name="writeAccess">if set to <c>true</c> the document should be opened with write access.</param>
+            <param name="writeAccessAllowed">if set to <c>true</c> the document is opened with write access.</param>
+            <returns>
+            The data of the document that was opened.
+            </returns>
+            <remarks>
+            The data object must not be the concrete data; instead create a new class which contains the concrete data. 
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.IDocumentProvider2.OpenDocument(System.IO.Stream,System.String)">
+            <summary>
+            Called to open a document from the specified <paramref name="stream"/>.
+            </summary>
+            <param name="stream">The stream with the document data.</param>
+            <param name="documentType">The document type.</param>
+            <returns>
+            The data of the document that was opened.
+            </returns>
+            <remarks>
+            The data object must not be the concrete data; instead create a new class which contains the concrete data. 
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.IDocumentProvider2.SaveDocument(System.Uri,System.String,System.Object)">
+            <summary>
+            Called to save the specified document to the specified <see cref="T:System.Uri"/>.
+            </summary>
+            <param name="uri">The URI to where the document is stored.</param>
+            <param name="documentType">The document type.</param>
+            <param name="data">The document data.</param>
+        </member>
+        <member name="M:Ade.Documents.IDocumentProvider2.SaveDocument(System.IO.Stream,System.String,System.Object)">
+            <summary>
+            Called to save the specified document to the specified <paramref name="stream"/>.
+            </summary>
+            <param name="stream">The stream to where the document data is stored.</param>
+            <param name="documentType">The document type.</param>
+            <param name="data">The document data.</param>
+        </member>
+        <member name="M:Ade.Documents.IDocumentProvider2.UpdateDocument(System.Uri,System.String,System.Object)">
+            <summary>
+            Called to update the document data with the content stored at the specified <see cref="T:System.Uri"/>.
+            </summary>
+            <param name="uri">The URI where the document data is stored.</param>
+            <param name="documentType">The document type.</param>
+            <param name="data">The data to update.</param>
+            <remarks>
+            This method could be called by a version control system or or a file system watcher when the content of the document is changed externally.
+            The document provider can then update the document data object.
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.IDocumentProvider2.UpdateDocument(System.IO.Stream,System.String,System.Object)">
+            <summary>
+            Called to update the document data with the content stored in the specified <paramref name="stream"/>.
+            </summary>
+            <param name="stream">The stream where the document data is stored.</param>
+            <param name="documentType">The document type.</param>
+            <param name="data">The data to update.</param>
+            <remarks>
+            This method could be called by a version control system or or a file system watcher when the content of the document is changed externally.
+            The document provider can then update the document data object.
+            </remarks>
+        </member>
+        <member name="M:Ade.Documents.IDocumentProvider2.RequestWriteAccess(Ade.Documents.IDocument2)">
+            <summary>
+            Request the document provider to increase the document`s access level to write access.
+            </summary>
+            <param name="document">The document for which the write access is requested.</param>
+            <returns><c>true</c> if access is granted; otherwise <c>false</c>.</returns>
+            <remarks>
+            This method must be called for example by an editor or the project tree to rquest write access on a document that is handled by a version control system.
+            </remarks>
+        </member>
+        <member name="T:Ade.Documents.IUriProtocolResolver">
+            <summary>
+            Provides functionality to resolve an URI conforming with a specific protocol (scheme).
+            </summary>
+            <remarks>The <see cref="T:Ade.Documents.IUriResolverService"/> utilizes one or more protocol specific 
+            implementations of this interface to fulfill its service.</remarks>
+        </member>
+        <member name="M:Ade.Documents.IUriProtocolResolver.GetReadStream(System.Uri)">
+            <summary>
+            Resolves an URI to provide read access to its related data.
+            </summary>
+            <param name="uri">The URI to be resolved.</param>
+            <returns>A readable stream of data associated with the given URI.</returns>
+        </member>
+        <member name="M:Ade.Documents.IUriProtocolResolver.GetWriteStream(System.Uri)">
+            <summary>
+            Resolves an URI to provide write access to its related data.
+            </summary>
+            <param name="uri">The URI to be resolved.</param>
+            <returns>A writable stream of data associated with the given URI.</returns>
+        </member>
+        <member name="M:Ade.Documents.IUriProtocolResolver.IsWritable(System.Uri)">
+            <summary>
+            Checks if write access is granted for the data associated with an URI (and therefore a writable stream can be accessed).
+            </summary>
+            <param name="uri">The URI (its related data) to check write access for.</param>
+            <returns><c>True</c> if write access is granted, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Ade.Documents.IUriProtocolResolver.RequestWriteAccess(System.Uri)">
+            <summary>
+            Request an URI to increase the accessibility level of its related data from readonly to write access.
+            </summary>
+            <param name="uri">The URI a request is made for.</param>
+            <returns><c>True</c> if write access is permitted, otherwise <c>false</c></returns>
+        </member>
+        <member name="T:Ade.Documents.IUriResolverService">
+            <summary>
+            Provides functionality to resolve an URI by providing access to its related data.
+            </summary>
+            <remarks>This service utilizes one or more protocol specific 
+            implementations of <see cref="T:Ade.Documents.IUriProtocolResolver"/> to fulfill its service.</remarks>
+        </member>
+        <member name="M:Ade.Documents.IUriResolverService.GetReadStream(System.Uri)">
+            <summary>
+            Resolves an URI to provide read access to its related data.
+            </summary>
+            <param name="uri">The URI to be resolved.</param>
+            <returns>A readable stream of data associated with the given URI.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+        <member name="M:Ade.Documents.IUriResolverService.GetWriteStream(System.Uri)">
+            <summary>
+            Resolves an URI to provide write access to its related data.
+            </summary>
+            <param name="uri">The URI to be resolved.</param>
+            <returns>A writable stream of data associated with the given URI.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+        <member name="M:Ade.Documents.IUriResolverService.IsWritable(System.Uri)">
+            <summary>
+            Checks if write access is granted for the data associated with an URI (and therefore a writable stream can be accessed).
+            </summary>
+            <param name="uri">The URI (its related data) to check write access for.</param>
+            <returns><c>True</c> if write access is granted, otherwise <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+        <member name="M:Ade.Documents.IUriResolverService.RequestWriteAccess(System.Uri)">
+            <summary>
+            Request an URI to increase the accessibility level of its related data from readonly to write access.
+            </summary>
+            <param name="uri">The URI a request is made for.</param>
+            <returns><c>True</c> if write access is permitted, otherwise <c>false</c></returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="uri"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="uri"/> is relative or the provided scheme does not match specified standards.</exception>
+            <exception cref="T:System.InvalidOperationException">The provided scheme (protocol)
+            cannot be associated to a registered instance of <see cref="T:Ade.Documents.IUriProtocolResolver"/></exception>
+        </member>
+    </members>
+</doc>
