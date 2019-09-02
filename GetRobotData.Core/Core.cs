@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using GetRobotData.Core.Internals;
+using KukaRoboter.CoreUtil.IO.Compression.Zip;
 using KukaRoboter.OnlineServicesFacade;
 
 
@@ -69,7 +71,7 @@ namespace GetRobotData.Core
             //TODO: 1- Create folder with robot serial number and save the backup there. 2- Save RDC data method
             Console.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Realizando backup...");
             ArchiveFacade archiver = new ArchiveFacade();
-            archiver.ArchiveAll(robotName.GetValue() + ".zip", true);
+            archiver.ArchiveAll(robotName.GetValue() + ".zip");
             Console.Write(" Hecho! \n");
             Console.ReadLine();
 
@@ -77,7 +79,33 @@ namespace GetRobotData.Core
             using (var unzip = new Unzip(robotName.GetValue() + ".zip"))
             {
                 unzip.Extract("am.ini", "am.ini");
-                unzip.Extract(@"C\KRC\Roboter\Rdc\" + serialNumber.GetValue() + @".cal", serialNumber.GetValue() + @".cal");
+                try
+                {
+                    bool isRdcDataPresent = false;
+                    foreach (var fileName in unzip.FileNames)
+                    {
+                        Console.WriteLine(fileName);
+                        if (fileName == @"C\KRC\Roboter\Rdc\" + serialNumber.GetValue() + @".cal")
+                        {
+                            isRdcDataPresent = true;
+                        }
+                    }
+
+                    if (isRdcDataPresent)
+                    {
+                        unzip.Extract(@"C\KRC\Roboter\Rdc\" + serialNumber.GetValue() + @".cal", serialNumber.GetValue() + @".cal");
+                    }
+                    else
+                    {
+                        Console.WriteLine(" Datos de RDC no presentes en el backup!");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+               
             }
 
             Console.Write(" Hecho! \n");
@@ -96,12 +124,18 @@ namespace GetRobotData.Core
             System.IO.File.Delete("am.ini");
             Console.Write(" Hecho! \n");
 
-            Console.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Creando directorio" + serialNumber.GetValue() + "en la raiz");
+            Console.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Creando directorio " + serialNumber.GetValue() + " en la raiz");
             System.IO.Directory.CreateDirectory(@"..\" + serialNumber.GetValue());
             Console.Write(" Hecho!\n");
 
-            Console.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Moviendo backup al directorio creado");
-            System.IO.File.Move(robotName.GetValue() + ".zip", @"..\" +  serialNumber.GetValue() + @"\" + robotName.GetValue() + ".zip");
+            Console.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Moviendo backup al directorio creado...");
+            if (File.Exists(@"..\" + serialNumber.GetValue() + @"\" + robotName.GetValue() + ".zip"))
+            {
+                Console.Write(" ...Backup existente, sobreescribiendo...");
+                File.Delete(@"..\" + serialNumber.GetValue() + @"\" + robotName.GetValue() + ".zip");
+            }
+
+            File.Move(robotName.GetValue() + ".zip", @"..\" +  serialNumber.GetValue() + @"\" + robotName.GetValue() + ".zip");
             Console.Write(" Hecho! \n");
 
 
