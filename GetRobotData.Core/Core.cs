@@ -1,19 +1,33 @@
 ﻿using System;
-using System.Linq;
+using System.IO;
 using GetRobotData.Core.Internals;
 using KukaRoboter.OnlineServicesFacade;
 using Microsoft.Win32;
 
 namespace GetRobotData.Core
 {
-
-    internal class Core
+    class KukaRobot
     {
+        public string TrafoName;
+        public int    SerialNumber;
+        public string RobotName;
+        public string Version;
+        public int    RobRunTime;
+        public string TechPacks;
+        public string LoadData;
 
-        private static void Main()
+        public KukaRobot()
         {
-
             ArchiveFacade a = new ArchiveFacade();
+            if (File.Exists(@"D:\BackupAll.zip"))
+            {
+                if (File.Exists(@"D:\BackupAllOld.zip"))
+                {
+                    File.Delete(@"D:\BackupAllOld.zip");
+                }
+                File.Move(@"D:\BackupAll.zip", @"D:\BackupAllOld.zip");
+            }
+
             a.ArchiveAll(@"D:\BackupAll.zip");
 
             using (var unzip = new Unzip(@"D:\BackupAll.zip"))
@@ -21,20 +35,46 @@ namespace GetRobotData.Core
                 unzip.Extract("am.ini", "am.ini");
             }
 
-            Console.WriteLine("Creando robot");
+            TrafoName    = Cross3.SyncVar.ShowVar("$trafoname[]");
+            SerialNumber = Convert.ToInt32(Cross3.SyncVar.ShowVar("$kr_serialno"));
+            RobotName    = Cross3.SyncVar.ShowVar("$ROBNAME[]");
+            Version      = Convert.ToString(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\KUKA Roboter GmbH\Version", "Version", "Version not found"));
+            RobRunTime   = Convert.ToInt32(Cross3.SyncVar.ShowVar("$robruntime"));
+            TechPacks    = StringManipulation.GetBetween(File.ReadAllText("am.ini"), "[TechPacks]");
 
-            KukaRobot k = new KukaRobot
-            (
-                trafoName: Cross3.SyncVar.ShowVar("$trafoname[]"),
-                serialNumber: Convert.ToInt32(Cross3.SyncVar.ShowVar("$kr_serialno")),
-                robotName: Cross3.SyncVar.ShowVar("$ROBNAME[]"),
-                version: Convert.ToString(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\KUKA Roboter GmbH\Version", "Version", "Version not found")),
-                robRunTime: Convert.ToInt32(Cross3.SyncVar.ShowVar("$robruntime")),
-                techPacks: StringManipulation.GetBetween(System.IO.File.ReadAllText("am.ini"), "[TechPacks]"),
-                loadData: Cross3.SyncVar.ShowVar($"LOAD_DATA[]")
-            );
-            
-            Console.ReadKey();
+            for (var i = 1; i < 16; i++)
+            {
+                if (Cross3.SyncVar.ShowVar($"LOAD_DATA[{i}].M") != Convert.ToString("-1.00000"))
+                {
+                    LoadData += $"TOOL {i}: " + Cross3.SyncVar.ShowVar($"LOAD_DATA[{i}]" + Environment.NewLine);
+                }
+            }
+
+            Directory.CreateDirectory($@"E:\{SerialNumber}");
+
+            PrintProperties();
+        }
+
+        public void PrintProperties()
+        {
+            foreach (var prop in GetType().GetProperties())
+            {
+                Console.WriteLine("[{0}]\n{1}\n", prop.Name, prop.GetValue(this, null));
+            }
+
+            foreach (var field in GetType().GetFields())
+            {
+                Console.WriteLine("[{0}]\n{1}\n", field.Name, field.GetValue(this));
+            }
+        }
+    }
+
+
+    internal class Core
+    {
+        private static void Main()
+        {
+            KukaRobot roboter = new KukaRobot();
         }
     }
 }
