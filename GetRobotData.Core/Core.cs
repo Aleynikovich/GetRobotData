@@ -13,7 +13,7 @@ namespace GetRobotData.Core
         static void WriteDataToFile(string serialNumber, string variableNameToWrite, string variableValueToWrite)
         {
             Console.WriteLine("Escribiendo {0} sobre fichero", variableNameToWrite);
-            File.AppendAllText(@"..\" + serialNumber + "\\" + "datos" + serialNumber + ".txt", "[" + variableNameToWrite + "]" + Environment.NewLine + variableValueToWrite + Environment.NewLine + Environment.NewLine);
+            File.AppendAllText(@"E:\" + serialNumber + "\\" + "datos" + serialNumber + ".txt", "[" + variableNameToWrite + "]" + Environment.NewLine + variableValueToWrite + Environment.NewLine + Environment.NewLine);
         }
 
         private static void Main()
@@ -40,27 +40,36 @@ namespace GetRobotData.Core
 
             #endregion
 
-            Console.WriteLine(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Realizando backup...");
-            if (File.Exists(robotName.GetValue() + ".zip"))
-            {
-                Console.WriteLine("Ya existe {0}, se renombra por {1}", robotName.GetValue() + ".zip", robotName.GetValue() + "Old.zip");
-                File.Move(robotName.GetValue() + ".zip", robotName.GetValue()  + "Old.zip");
-            }
+            //if (File.Exists(robotName.GetValue() + ".zip"))
+            //{
+            //    Console.WriteLine("Ya existe {0}, se renombra por {1}", robotName.GetValue() + ".zip", robotName.GetValue() + "Old.zip");
+            //    File.Move(robotName.GetValue() + ".zip", robotName.GetValue()  + "Old.zip");
+            //}
             if (File.Exists(@"D:\BackupAll.zip"))
             {
-                Console.WriteLine("Ya existe {0}, se renombra por {1}", @"D:\BackupAll.zip", @"D:\BackupAllOld.zip");
-                File.Delete(@"D:\BackupAllOld.zip");
+                Console.WriteLine("Ya existe {0}, se guarda como {1}", @"D:\BackupAll.zip", @"D:\BackupAllOld.zip");
+                if (File.Exists(@"D:\BackupAllOld.zip"))
+                {
+                 File.Delete(@"D:\BackupAllOld.zip");   
+                }
                 File.Move(@"D:\BackupAll.zip", @"D:\BackupAllOld.zip");
             }
+            Console.WriteLine(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Realizando backup...");
 
             ArchiveFacade archiver = new ArchiveFacade();
             archiver.ArchiveAll(robotName.GetValue() + ".zip");
 
-            if (!File.Exists(robotName.GetValue() + ".zip"))
+            Console.WriteLine("Backup finalizado");
+
+            if (File.Exists(@"E:\" + serialNumber.GetValue() + "\\" + robotName.GetValue() + ".zip") == false)
             {
                 if (File.Exists(@"D:\BackupAll.zip"))
                 {
-                    File.Move(@"D:\BackupAll.zip", robotName.GetValue() + ".zip");
+                    Console.WriteLine("moviendo archivo desde D a E (creando carpeta)");
+                    Directory.CreateDirectory(@"E:\" + serialNumber.GetValue());
+                    Console.WriteLine("Se mueve backup desde D a E");
+                    File.Move(@"D:\BackupAll.zip", @"E:\" + serialNumber.GetValue() + "\\" + robotName.GetValue() + ".zip");
+                    Console.WriteLine("Fet");
                 }
                 else
                 {
