@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using GetRobotData.Core.Internals;
+using JetBrains.Annotations;
 using KukaRoboter.OnlineServicesFacade;
 using Microsoft.Win32;
 
@@ -14,7 +15,7 @@ namespace GetRobotData.Core
         public string Version;
         public int    RobRunTime;
         public string TechPacks;
-        public string LoadData;
+        public string[] LoadData = new string[16];
 
         public KukaRobot()
         {
@@ -25,6 +26,7 @@ namespace GetRobotData.Core
                 {
                     File.Delete(@"D:\BackupAllOld.zip");
                 }
+
                 File.Move(@"D:\BackupAll.zip", @"D:\BackupAllOld.zip");
             }
 
@@ -42,15 +44,24 @@ namespace GetRobotData.Core
             RobRunTime   = Convert.ToInt32(Cross3.SyncVar.ShowVar("$robruntime"));
             TechPacks    = StringManipulation.GetBetween(File.ReadAllText("am.ini"), "[TechPacks]");
 
-            for (var i = 1; i < 16; i++)
+            try
             {
-                if (Cross3.SyncVar.ShowVar($"LOAD_DATA[{i}].M") != Convert.ToString("-1.00000"))
+                for (var i = 1; i < 16; i++)
                 {
-                    LoadData += $"TOOL {i}: " + Cross3.SyncVar.ShowVar($"LOAD_DATA[{i}]" + Environment.NewLine);
+                    if (Cross3.SyncVar.ShowVar($"LOAD_DATA[{i}].M") != Convert.ToString("-1.00000"))
+                    {
+                        this.LoadData[i] = $"TOOL {i}: " + Cross3.SyncVar.ShowVar($"LOAD_DATA[{i}]" + Environment.NewLine);
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+           
 
-            Directory.CreateDirectory($@"E:\{SerialNumber}");
+            //Directory.CreateDirectory($@"E:\{SerialNumber}");
 
             PrintProperties();
         }
@@ -75,6 +86,7 @@ namespace GetRobotData.Core
         private static void Main()
         {
             KukaRobot roboter = new KukaRobot();
+            Console.ReadLine();
         }
     }
 }
