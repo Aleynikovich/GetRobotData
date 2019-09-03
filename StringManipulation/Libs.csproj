@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Internals\Unzip.cs" />
     <Compile Include="StringManipulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

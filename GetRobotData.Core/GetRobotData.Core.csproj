@@ -32,14 +32,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="KukaRoboter.Contracts.resources">
+      <HintPath>..\KUKALIBS\ro\KukaRoboter.Contracts.resources.dll</HintPath>
+    </Reference>
     <Reference Include="KukaRoboter.CoreUtil">
       <HintPath>..\KUKALIBS\KukaRoboter.CoreUtil.dll</HintPath>
     </Reference>
     <Reference Include="KukaRoboter.OnlineServicesFacade">
       <HintPath>..\KUKALIBS\KukaRoboter.OnlineServicesFacade.dll</HintPath>
     </Reference>
+    <Reference Include="PlugInBase">
+      <HintPath>..\KUKALIBS\PlugInBase.dll</HintPath>
+    </Reference>
+    <Reference Include="PrimaryInterOp.Cross3Krc">
+      <HintPath>D:\Desktop\TakeLLDValue\TakeLLDValue\Ref\PrimaryInterOp.Cross3Krc.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="RobotData">
+      <HintPath>..\KUKALIBS\RobotData.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -47,16 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core.cs" />
+    <Compile Include="Internals\Cross3.cs" />
+    <Compile Include="Internals\KukaRobot.cs" />
+    <Compile Include="Internals\StringManipulation.cs" />
     <Compile Include="Internals\Unzip.cs" />
-    <Compile Include="KrcFile.cs" />
-    <Compile Include="KrcParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\StringManipulation\Libs.csproj">
-      <Project>{40736a45-7c93-49e9-a655-831abc7805b4}</Project>
-      <Name>Libs</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include=".dll" />
