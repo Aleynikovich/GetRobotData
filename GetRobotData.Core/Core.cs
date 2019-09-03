@@ -1,10 +1,6 @@
 ﻿using System;
 using System.IO;
 using GetRobotData.Core.Internals;
-using KukaRoboter.BackupManagerService.Configuration;
-using KukaRoboter.BackupManagerService.ErrorHandling;
-using KukaRoboter.BackupManagerService.Implementation;
-using KukaRoboter.BackupManagerService.Interfaces;
 using KukaRoboter.OnlineServicesFacade;
 using KukaRoboter.OnlineServicesFacade.Extensions;
 
@@ -20,7 +16,7 @@ namespace GetRobotData.Core
             #region Files
 
             KrcFile mada = new KrcFile(@"C:\KRC\ROBOTER\KRC\R1\Mada\", "$machine.dat");
-            KrcFile robcor = new KrcFile(@"C:\KRC\ROBOTER\KRC\R1\Mada\", "$robcor.dat");
+            //KrcFile robcor = new KrcFile(@"C:\KRC\ROBOTER\KRC\R1\Mada\", "$robcor.dat");
             KrcFile config = new KrcFile(@"C:\KRC\ROBOTER\KRC\R1\System\", "$config.dat");
 
             #endregion
@@ -38,11 +34,28 @@ namespace GetRobotData.Core
 
             #endregion
 
-
             Console.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Realizando backup...");
+            if (File.Exists(robotName.GetValue() + ".zip"))
+            {
+                Console.WriteLine("Ya existe {0}, se renombra por {1}", robotName.GetValue() + ".zip", robotName.GetValue() + "Old.zip");
+                File.Move(robotName.GetValue() + ".zip", robotName.GetValue()  + "Old.zip");
+            }
+            if (File.Exists(@"D:\BackupAll.zip"))
+            {
+                Console.WriteLine("Ya existe {0}, se renombra por {1}", @"D:\BackupAll.zip", @"D:\BackupAllOld.zip");
+                File.Move(@"D:\BackupAll.zip", @"D:\BackupAllOld.zip");
+            }
+
             ArchiveFacade archiver = new ArchiveFacade();
             archiver.ArchiveAll(robotName.GetValue() + ".zip");
-            Console.Write(" Hecho! \n");
+
+            if (!File.Exists(robotName.GetValue() + ".zip"))
+            {
+                if (File.Exists(@"D:\BackupAll.zip"))
+                {
+                    File.Move(@"D:\BackupAll.zip", robotName.GetValue() + ".zip");
+                }
+            }
 
             Console.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Extrayendo datos del backup...");
             using (var unzip = new Unzip(robotName.GetValue() + ".zip"))
@@ -79,34 +92,35 @@ namespace GetRobotData.Core
                 }
                
             }
-
-            Console.Write(" Hecho! \n");
-
             using (StreamWriter w = File.AppendText("am.ini"))
             {
                 w.WriteLine("endoffile");
             }
-
             KrcFile am = new KrcFile(null, "am.ini");
+
             KrcParameter techPacks = new KrcParameter("techPacks", am , "[TechPacks]", "endoffile");
 
             Console.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Limpiando archivos temporales...");
-            System.IO.File.Delete("am.ini");
-            Console.Write(" Hecho! \n");
+            if (File.Exists("am.ini"))
+            {
+                File.Delete("am.ini");
+            }
+            if (File.Exists(serialNumber.GetValue() + @".cal"))
+            {
+                File.Delete(serialNumber.GetValue() + @".cal");
+            }
+
 
             Console.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Creando directorio " + serialNumber.GetValue() + " en la raiz...");
             System.IO.Directory.CreateDirectory(@"..\" + serialNumber.GetValue());
-            Console.Write(" Hecho!\n");
 
             Console.Write(DateTime.Now.ToString("MM/dd/yyyy HH:mm: ") + "Moviendo backup al directorio creado...");
             if (File.Exists(@"..\" + serialNumber.GetValue() + @"\" + robotName.GetValue() + ".zip"))
             {
-                Console.Write(" ...Backup existente, sobreescribiendo...");
+                Console.Write(" AVISO: Backup existente, sobreescribiendo...");
                 File.Delete(@"..\" + serialNumber.GetValue() + @"\" + robotName.GetValue() + ".zip");
             }
-
             File.Move(robotName.GetValue() + ".zip", @"..\" +  serialNumber.GetValue() + @"\" + robotName.GetValue() + ".zip");
-            Console.Write(" Hecho! \n");
 
 
             #region WriteAllToCsv
@@ -116,6 +130,14 @@ namespace GetRobotData.Core
             #endregion
 
             #region Debugging 
+
+            Console.WriteLine(techPacks.GetValue());
+            Console.WriteLine(version.GetValue());
+            Console.WriteLine(serialNumber.GetValue());
+            Console.WriteLine(robotName.GetValue());
+            Console.WriteLine(trafoName.GetValue());
+            Console.WriteLine(robRunTime.GetValue());
+            Console.WriteLine(loadData.GetValue());
 
             Console.ReadLine();
 
