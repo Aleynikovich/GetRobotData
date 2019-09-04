@@ -1,10 +1,12 @@
 ﻿using System;
+using System.CodeDom;
 using System.Data;
 using System.IO;
 using System.Text;
 using GetRobotData.Core.Internals;
 using KukaRoboter.OnlineServicesFacade;
 using Microsoft.Win32;
+
 
 namespace GetRobotData.Core
 {
@@ -30,7 +32,9 @@ namespace GetRobotData.Core
 
             try
             {
+                Console.Write("Archivando ficheros, NO retirar USB...");
                 a.ArchiveAll(BackupDir);
+                Console.Write(" OK\n");
             }
             catch (Exception e)
             {
@@ -41,10 +45,12 @@ namespace GetRobotData.Core
 
             try
             {
+                Console.Write("Extrayendo datos del archivado...");
                 using (var unzip = new Unzip(BackupDir))
                 {
                     unzip.Extract("am.ini", "am.ini");
                 }
+                Console.Write(" OK\n");
             }
             catch (Exception e)
             {
@@ -55,19 +61,31 @@ namespace GetRobotData.Core
 
             try
             {
-                TrafoName    = StringManipulation.GetBetween(Cross3.SyncVar.ShowVar("$trafoname[]"), "#", "\"");
-                SerialNumber = Convert.ToInt32(Cross3.SyncVar.ShowVar("$kr_serialno"));
-                RobotName    = StringManipulation.GetBetween(Cross3.SyncVar.ShowVar("$ROBNAME[]"),"\"","\"");
-                Version      = Convert.ToString(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\KUKA Roboter GmbH\Version", "Version", "Version not found"));
-                RobRunTime   = Convert.ToInt32(Cross3.SyncVar.ShowVar("$robruntime"));
-                TechPacks    = StringManipulation.GetBetween(File.ReadAllText("am.ini"), "[TechPacks]");
-
-                for (var i = 1; i < 16; i++)
+                Console.Write("Estableciendo y comprobando comunicación con KUKA Cross3...");
+                if (Cross3.SyncVar.ShowVar($"$IN[1025]")  == "TRUE")
                 {
-                    if (Cross3.SyncVar.ShowVar($"LOAD_DATA[{i}].M") != Convert.ToString("-1.00000"))
+                    Console.Write(" OK\n");
+                    Console.Write("Descargando variables de sistema...");
+                    TrafoName    = StringManipulation.GetBetween(Cross3.SyncVar.ShowVar("$trafoname[]"), "#", "\"");
+                    SerialNumber = Convert.ToInt32(Cross3.SyncVar.ShowVar("$kr_serialno"));
+                    RobotName    = StringManipulation.GetBetween(Cross3.SyncVar.ShowVar("$ROBNAME[]"), "\"", "\"");
+                    Version      = Convert.ToString(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\KUKA Roboter GmbH\Version", "Version", "Version not found"));
+                    RobRunTime   = Convert.ToInt32(Cross3.SyncVar.ShowVar("$robruntime"));
+                    TechPacks    = StringManipulation.GetBetween(File.ReadAllText("am.ini"), "[TechPacks]");
+
+                    for (var i = 1; i < 16; i++)
                     {
-                        LoadData += $"TOOL {i}: " + Cross3.SyncVar.ShowVar($"LOAD_DATA[{i}]" + Environment.NewLine);
+                        if (Cross3.SyncVar.ShowVar($"LOAD_DATA[{i}].M") != Convert.ToString("-1.00000"))
+                        {
+                            LoadData += Environment.NewLine + $"TOOL {i}: " + Cross3.SyncVar.ShowVar($"LOAD_DATA[{i}]\n" + Environment.NewLine + Environment.NewLine);
+                        }
                     }
+
+                    Console.Write(" OK\n");
+                }
+                else
+                {
+                    Console.WriteLine("No ha sido posible comunicar con Cross 3");
                 }
 
                 if (File.Exists("am.ini"))
@@ -85,8 +103,11 @@ namespace GetRobotData.Core
 
             try
             {
+                Console.Write("Guardando backup como " + $@"E:\{SerialNumber}\{RobotName}.zip...");
                 Directory.CreateDirectory($@"E:\{SerialNumber}");
                 File.Copy(BackupDir, $@"E:\{SerialNumber}\{RobotName}.zip", true);
+                Console.Write(" OK\n");
+
             }
             catch (Exception e)
             {
@@ -122,6 +143,7 @@ namespace GetRobotData.Core
                 Console.WriteLine("[{0}]\n{1}\n", field.Name, field.GetValue(this));
                 File.AppendAllText($@"E:\{SerialNumber}\Datos{SerialNumber}.txt", $"[{field.Name}]" + Environment.NewLine + field.GetValue(this) + Environment.NewLine);
             }
+            Console.WriteLine("\nLos datos de robot han sido guardados en " + $@"E:\{SerialNumber}\Datos{SerialNumber}.txt");
         }
     }
     
@@ -130,7 +152,9 @@ namespace GetRobotData.Core
         private static void Main()
         {
             KukaRobot roboter = new KukaRobot();
-            Console.ReadLine();
+            Console.WriteLine("Programa finalizado con éxito, ¡CERRAR ANTES DE EXTRAER USB!");
+            Console.WriteLine("La ventana se cerrará automáticamente transcurridos 30 segundos");
+            System.Threading.Thread.Sleep(30000);
         }
     }
 }

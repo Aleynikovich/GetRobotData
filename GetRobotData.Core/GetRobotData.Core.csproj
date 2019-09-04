@@ -44,9 +44,10 @@
     <Reference Include="PlugInBase">
       <HintPath>..\KUKALIBS\PlugInBase.dll</HintPath>
     </Reference>
-    <Reference Include="PrimaryInterOp.Cross3Krc">
-      <HintPath>D:\Desktop\TakeLLDValue\TakeLLDValue\Ref\PrimaryInterOp.Cross3Krc.dll</HintPath>
+    <Reference Include="PrimaryInterOp.Cross3Krc, Version=2.7.0.0, Culture=neutral, PublicKeyToken=eae976646d224940, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\KUKALIBS\PrimaryInterOp.Cross3Krc.dll</HintPath>
     </Reference>
     <Reference Include="RobotData">
       <HintPath>..\KUKALIBS\RobotData.dll</HintPath>
