@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.IO;
+using System.Text;
 using GetRobotData.Core.Internals;
 using KukaRoboter.OnlineServicesFacade;
 using Microsoft.Win32;
@@ -23,12 +25,7 @@ namespace GetRobotData.Core
 
             if (File.Exists(BackupDir))
             {
-                if (File.Exists(BackupDir + ".old"))
-                {
-                    File.Delete(BackupDir + ".old");
-                }
-
-                File.Move(BackupDir, BackupDir + ".old");
+                File.Copy(BackupDir, BackupDir + ".old", true);
             }
 
             try
@@ -72,6 +69,12 @@ namespace GetRobotData.Core
                         LoadData += $"TOOL {i}: " + Cross3.SyncVar.ShowVar($"LOAD_DATA[{i}]" + Environment.NewLine);
                     }
                 }
+
+                if (File.Exists("am.ini"))
+                {
+                    File.Delete("am.ini");
+                }
+
             }
             catch (Exception e)
             {
@@ -92,19 +95,32 @@ namespace GetRobotData.Core
                 throw;
             }
 
-            PrintProperties();
+            try
+            {
+                PrintProperties();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine("Error creando archivo de datos");
+                throw;
+            }
+            
         }
+
 
         public void PrintProperties()
         {
             foreach (var prop in GetType().GetProperties())
             {
                 Console.WriteLine("[{0}]\n{1}\n", prop.Name, prop.GetValue(this, null));
+                File.AppendAllText($@"E:\{SerialNumber}\Datos{SerialNumber}.txt", $"[{prop.Name}]" + Environment.NewLine + prop.GetValue(this,null) + Environment.NewLine);
             }
 
             foreach (var field in GetType().GetFields())
             {
                 Console.WriteLine("[{0}]\n{1}\n", field.Name, field.GetValue(this));
+                File.AppendAllText($@"E:\{SerialNumber}\Datos{SerialNumber}.txt", $"[{field.Name}]" + Environment.NewLine + field.GetValue(this) + Environment.NewLine);
             }
         }
     }
