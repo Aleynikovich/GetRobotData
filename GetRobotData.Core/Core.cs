@@ -58,9 +58,9 @@ namespace GetRobotData.Core
 
             try
             {
-                TrafoName    = Cross3.SyncVar.ShowVar("$trafoname[]");
+                TrafoName    = StringManipulation.GetBetween(Cross3.SyncVar.ShowVar("$trafoname[]"), "#", "\"");
                 SerialNumber = Convert.ToInt32(Cross3.SyncVar.ShowVar("$kr_serialno"));
-                RobotName    = Cross3.SyncVar.ShowVar("$ROBNAME[]");
+                RobotName    = StringManipulation.GetBetween(Cross3.SyncVar.ShowVar("$ROBNAME[]"),"\"","\"");
                 Version      = Convert.ToString(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\KUKA Roboter GmbH\Version", "Version", "Version not found"));
                 RobRunTime   = Convert.ToInt32(Cross3.SyncVar.ShowVar("$robruntime"));
                 TechPacks    = StringManipulation.GetBetween(File.ReadAllText("am.ini"), "[TechPacks]");
@@ -83,6 +83,7 @@ namespace GetRobotData.Core
             try
             {
                 Directory.CreateDirectory($@"E:\{SerialNumber}");
+                File.Copy(BackupDir, $@"E:\{SerialNumber}\{RobotName}.zip", true);
             }
             catch (Exception e)
             {
