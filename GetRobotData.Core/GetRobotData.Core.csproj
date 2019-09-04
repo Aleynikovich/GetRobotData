@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="Core.cs" />
     <Compile Include="Internals\Cross3.cs" />
-    <Compile Include="Internals\KukaRobot.cs" />
     <Compile Include="Internals\StringManipulation.cs" />
     <Compile Include="Internals\Unzip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
