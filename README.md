@@ -4,7 +4,7 @@ Con este programa podemos hacer un "all-in-one" a la hora de hacer mantenimiento
 Para compilar el proyecto es necesario descargar Visual Studio Community 2019. Una vez lo tengáis podéis descargarlo con el botón
 "abrir con Visual Studio".
 
-![Imgur](https://imgur.com/b5Yezgu)
+![img](https://i.imgur.com/b5Yezgu.png)
 
 Una vez tengáis el proyecto abierto solo hay que compilarlo (F6) y se os creará la carpeta Debug con el archivo ejecutable.
 
