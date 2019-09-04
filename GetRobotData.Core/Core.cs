@@ -15,7 +15,7 @@ namespace GetRobotData.Core
         public int    RobRunTime;
         public string TechPacks;
         public string LoadData;
-        public const string BackupDir = @"D:\BackupAll.zip";
+        private const string BackupDir = @"D:\BackupAll.zip";
 
         public KukaRobot()
         {
